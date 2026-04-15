@@ -29,9 +29,11 @@ function Header() {
 
           {/* Luxury Logo Branding */}
           <Link to="/" className="flex items-center gap-3 transition-transform hover:scale-105 active:scale-95">
-            <div className="p-2 rounded-xl bg-[#1dd1a1] text-black shadow-[0_0_20px_rgba(29,209,161,0.3)]">
-              <Car className="w-6 h-6" />
-            </div>
+            <img 
+              src="/logo-auto-principal.png" 
+              alt="Solara Auto" 
+              className="w-14 h-10 object-cover rounded-xl shadow-[0_0_20px_rgba(29,209,161,0.2)]" 
+            />
             <span className="text-xl md:text-2xl font-black text-white tracking-[0.2em] font-impact uppercase">
               SOLARA <span className="text-[#1dd1a1]">AUTO</span>
             </span>

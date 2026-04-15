@@ -13,6 +13,7 @@ import AdminVehicles from './pages/admin/Vehicles'
 import AdminNewVehicle from './pages/admin/NewVehicle'
 import AdminEditVehicle from './pages/admin/EditVehicle'
 import AdminStoreProfile from './pages/admin/StoreProfile'
+import SecondBrainAuto from './pages/admin/SecondBrain'
 
 // Layouts
 import PublicLayout from './layouts/PublicLayout'
@@ -37,6 +38,7 @@ function AppRoutes() {
         <Route path="/admin/veiculos/novo" element={<AdminNewVehicle />} />
         <Route path="/admin/veiculos/:id/editar" element={<AdminEditVehicle />} />
         <Route path="/admin/loja" element={<AdminStoreProfile />} />
+        <Route path="/admin/second-brain" element={<SecondBrainAuto />} />
       </Route>
     </Routes>
   )

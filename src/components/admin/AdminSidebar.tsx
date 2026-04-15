@@ -1,9 +1,10 @@
 import { Link, useLocation } from 'react-router-dom'
-import { LayoutDashboard, Car, Settings, LogOut } from 'lucide-react'
+import { LayoutDashboard, Car, Settings, LogOut, BrainCircuit } from 'lucide-react'
 import { useAuth } from '../../hooks/useAuth'
 
 const menuItems = [
   { icon: LayoutDashboard, label: 'Dashboard', path: '/admin' },
+  { icon: BrainCircuit, label: 'Second Brain', path: '/admin/second-brain' },
   { icon: Car, label: 'Veículos', path: '/admin/veiculos' },
   { icon: Settings, label: 'Perfil da Loja', path: '/admin/loja' },
 ]

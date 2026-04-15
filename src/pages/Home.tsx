@@ -35,6 +35,12 @@ function Home() {
         {/* Animated Background Elements */}
         <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[1140px] h-[600px] bg-[#1dd1a1]/5 blur-[120px] rounded-full" />
         <div className="absolute -top-48 -right-48 w-96 h-96 bg-[#1dd1a1]/10 blur-[100px] rounded-full" />
+        {/* Logo Destaque como herói visual */}
+        <img 
+          src="/logo-auto-destaque.png" 
+          alt="" 
+          className="absolute bottom-0 right-0 w-[700px] opacity-[0.06] pointer-events-none select-none" 
+        />
         
         <div className="max-w-[1140px] mx-auto relative z-10 text-center">
           <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/5 border border-white/10 text-[10px] font-black uppercase tracking-[0.3em] text-[#1dd1a1] mb-10 animate-pulse">
@@ -166,7 +172,7 @@ function Home() {
       <footer className="pt-32 pb-12 px-6 text-center bg-[#0B0E14]">
         <div className="max-w-[1140px] mx-auto border-t border-white/5 pt-12">
           <div className="flex items-center justify-center gap-3 mb-8">
-            <div className="p-2 rounded-xl bg-[#1dd1a1] text-black"><Car className="w-6 h-6" /></div>
+            <img src="/logo-auto-principal.png" alt="Solara Auto" className="w-14 h-10 object-cover rounded-xl" />
             <span className="text-2xl font-black tracking-[0.2em] font-impact uppercase">SOLARA <span className="text-[#1dd1a1]">AUTO</span></span>
           </div>
           <p className="text-[#576574] text-sm max-w-lg mx-auto mb-10 font-medium">A plataforma definitiva para quem exige o melhor em mobilidade e tecnologia disruptiva.</p>
