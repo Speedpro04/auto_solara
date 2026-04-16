@@ -63,7 +63,7 @@ function AdminDashboard() {
     >
       <div className="flex flex-col md:flex-row md:items-center justify-between gap-6">
         <div>
-          <h1 className="text-5xl font-black font-impact text-white tracking-tight uppercase italic leading-none">
+          <h1 className="text-xl font-black font-impact text-white tracking-tight uppercase italic leading-none">
             Visão <span className="text-[#1dd1a1]">Geral</span>
           </h1>
           <p className="text-[#576574] text-[10px] mt-4 font-black uppercase tracking-[0.5em] flex items-center gap-3">
@@ -107,7 +107,7 @@ function AdminDashboard() {
               </div>
             </div>
             <span className="block text-[10px] text-[#576574] font-black uppercase tracking-[0.3em] mb-2">{stat.label}</span>
-            <span className="block text-3xl font-black text-white tracking-tighter">{stat.value}</span>
+            <span className="block text-xl font-black text-white tracking-tighter">{stat.value}</span>
             <div className="mt-4 h-1 w-full bg-white/5 rounded-full overflow-hidden">
                <motion.div 
                  initial={{ width: 0 }}
@@ -183,7 +183,7 @@ function AdminDashboard() {
                <div className="w-12 h-12 bg-black rounded-2xl flex items-center justify-center mb-10 shadow-xl">
                  <Activity className="w-6 h-6 text-[#1dd1a1]" />
                </div>
-               <h2 className="text-4xl font-black uppercase tracking-tighter leading-[0.9] mb-6 font-impact italic">POLARS <br />ENGINE <br />ACTIVE</h2>
+               <h2 className="text-xl font-black uppercase tracking-tighter leading-[0.9] mb-6 font-impact italic">POLARS <br />ENGINE <br />ACTIVE</h2>
                <p className="font-bold text-xs leading-relaxed opacity-80 uppercase tracking-tight">O motor de processamento está analisando 452 eventos de tráfego. Conversão projetada em alta.</p>
              </div>
              <button className="relative z-10 w-full py-6 bg-black text-white rounded-[24px] text-[10px] font-black uppercase tracking-[0.4em] text-center hover:scale-[1.02] active:scale-[0.98] transition-all shadow-2xl">

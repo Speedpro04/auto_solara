@@ -30,7 +30,42 @@ function Home() {
   const spotlightVehicles = recentVehicles.slice(0, 6)
 
   return (
-    <div className="text-white font-sans w-full overflow-hidden">
+    <div className="text-white font-sans w-full overflow-hidden relative">
+      {/* Decoração Global (Logo repetida por toda a altura) */}
+      <img src="/logo-auto-destaque.png" className="absolute top-[10%] -right-[150px] w-[300px] md:w-[650px] opacity-[0.1] pointer-events-none select-none object-contain z-0 -rotate-[15deg]" alt="" />
+      <img src="/logo-auto-destaque.png" className="absolute top-[calc(45%-95px)] left-1/2 -translate-x-1/2 ml-[370px] w-[220px] md:w-[570px] opacity-[0.1] pointer-events-none select-none object-contain z-0" alt="" />
+      <img src="/logo-auto-destaque.png" className="absolute top-[calc(82%+120px)] left-1/2 -translate-x-1/2 ml-[450px] w-[260px] md:w-[660px] opacity-[0.1] pointer-events-none select-none object-contain z-0" alt="" />
+      
+      {/* Frota SUV Decorativa - Centralizada (Subida +30px) */}
+      <motion.img 
+        initial={{ opacity: 0, y: 50 }} animate={{ opacity: 0.1, y: 0 }} transition={{ duration: 2, ease: "easeOut" }}
+        src="/suv.png" 
+        className="absolute top-[50px] left-1/2 -translate-x-1/2 w-[350px] md:w-[950px] pointer-events-none select-none object-contain z-0 drop-shadow-[0_0_80px_rgba(29,209,161,0.15)]" 
+        alt="" 
+      />
+      <motion.img 
+        initial={{ opacity: 0, x: 200 }} animate={{ opacity: 0.1, x: 0 }} transition={{ duration: 2, delay: 0.5, ease: "easeOut" }}
+        src="/suv.png" 
+        className="absolute top-[5790px] left-1/2 -translate-x-1/2 -ml-[500px] w-[250px] md:w-[700px] pointer-events-none select-none object-contain z-0 drop-shadow-[0_0_80px_rgba(255,255,255,0.05)]" 
+        alt="" 
+      />
+      
+      
+      {/* Moto Real da Loja - Local 01: Superior Direita (Atrás do Hero) */}
+      <motion.img 
+        initial={{ opacity: 0, x: 200 }} whileInView={{ opacity: 0.1, x: 0 }} viewport={{ once: true }} transition={{ duration: 2.5, ease: "easeOut" }}
+        src="/moto_lo_ja.png" 
+        className="absolute top-[1450px] -right-[110px] w-[350px] md:w-[900px] pointer-events-none select-none object-contain z-0 drop-shadow-[0_0_100px_rgba(29,209,161,0.15)] rotate-[-12deg] scale-110" 
+        alt="" 
+      />
+
+      {/* Moto Real da Loja - Local 02: Meio Esquerda (Entre os carros da vitrine) */}
+      <motion.img 
+        initial={{ opacity: 0, x: -250 }} whileInView={{ opacity: 0.1, x: 0 }} viewport={{ once: true }} transition={{ duration: 3, delay: 0.5, ease: "easeOut" }}
+        src="/moto_loja.png" 
+        className="absolute top-[3710px] left-1/2 -translate-x-1/2 -ml-[180px] w-[270px] md:w-[820px] pointer-events-none select-none object-contain z-0 -scale-x-100 rotate-[10deg] drop-shadow-[0_0_80px_rgba(255,255,255,0.03)]" 
+        alt="" 
+      />
       
       {/* Modern Slim Search Section Just Below Menu */}
       <section className="relative pt-[190px] px-6 z-30 mb-8 max-w-[1080px] mx-auto">
@@ -51,35 +86,41 @@ function Home() {
       </section>
 
       {/* Dynamic Hero Section with Luxury Flare */}
-      <section className="relative pt-12 pb-40 px-4 overflow-hidden">
+      <section className="relative pt-24 md:pt-32 pb-32 px-4 overflow-hidden">
         {/* Animated Background Elements */}
         <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[1140px] h-[800px] bg-[#1dd1a1]/5 blur-[120px] rounded-full" />
         <div className="absolute -top-48 -right-48 w-96 h-96 bg-[#1dd1a1]/10 blur-[100px] rounded-full" />
-        <img 
-          src="/logo-auto-destaque.png" 
-          alt="" 
-          className="absolute bottom-0 right-0 w-[800px] opacity-[0.04] pointer-events-none select-none object-contain" 
-        />
         
         <div className="max-w-[1140px] mx-auto relative z-10">
-          <div className="text-center mb-16">
-            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/5 border border-white/10 text-[10px] font-black uppercase tracking-[0.4em] text-[#1dd1a1] mb-12 animate-pulse shadow-[0_0_20px_rgba(29,209,161,0.1)]">
+          <div className="text-center mb-12 flex flex-col items-center justify-center">
+            
+            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/5 border border-white/10 text-[10px] font-black uppercase tracking-[0.4em] text-[#1dd1a1] mb-8 animate-pulse shadow-[0_0_20px_rgba(29,209,161,0.1)]">
               <Sparkles className="w-3" />
               Experiência Automotiva de Elite 2026
             </div>
             
-            <h1 className="text-4xl md:text-[55px] font-black font-['Architects_Daughter'] tracking-tighter mb-10 leading-[1] text-white uppercase mt-4">
-              {/* SEO keyword anchor — visível para o Google, elegante para o usuário */}
-              <span className="block text-sm md:text-base font-black uppercase tracking-[0.3em] text-[#576574] mb-3 opacity-70">
+            <h1 className="flex flex-col items-center justify-center text-center relative z-10 w-full mb-10">
+              
+              {/* SEO keyword anchor — movido 10px para baixo e com cor cinza mais viva */}
+              <span className="block text-[9px] md:text-[10px] font-black uppercase tracking-[0.4em] text-[#8395a7] mt-[10px] mb-12">
                 Comprar Carro Seminovo e Importado com Garantia | Solara Auto
               </span>
-              <span className="block text-xl md:text-2xl text-[#1dd1a1] mb-2 drop-shadow-md font-['Architects_Daughter']">Aqui não vendemos carros. Entregamos Ativos de Valor.</span>
-              MAIS QUE POTÊNCIA,<br />
-              <span className="text-[#1dd1a1] drop-shadow-[0_0_20px_rgba(29,209,161,0.5)]">ESTADO DE ARTE</span>
+              
+              {/* Call to action emocional */}
+              <span className="block text-xl md:text-2xl text-[#1dd1a1] drop-shadow-md font-['Architects_Daughter'] rotate-[-2deg] mb-[30px] z-20">
+                "Aqui não vendemos carros. Entregamos Ativos de Valor."
+              </span>
+              
+              {/* HEADLINE PRINCIPAL (Reduzida 20px com espaçamento de 30px no topo) */}
+              <span className="block text-[24px] md:text-[25px] lg:text-[55px] font-black font-impact tracking-tighter uppercase italic leading-[0.9] text-white drop-shadow-2xl">
+                MAIS QUE POTÊNCIA,<br />
+                <span className="text-[#1dd1a1] drop-shadow-[0_0_40px_rgba(29,209,161,0.4)]">ESTADO DE ARTE</span>
+              </span>
             </h1>
 
-            <p className="text-[#8395a7] text-lg md:text-2xl max-w-3xl mx-auto mb-20 font-medium tracking-tight leading-relaxed">
-              Adquira seu próximo grande ativo sem sair de casa. Uma curadoria absoluta onde design vanguardista e garantias inegociáveis se encontram para proteger o seu patrimônio.
+            {/* Texto de Apoio Reduzido (~16px) */}
+            <p className="text-[#8395a7] text-sm md:text-base max-w-2xl mx-auto mb-8 font-medium tracking-tight leading-relaxed px-4">
+              Adquira seu próximo grande ativo sem sair de casa. Uma curadoria absoluta onde design vanguardista e garantias inegociáveis se encontram para blindar o seu patrimônio financeiro.
             </p>
           </div>
 
@@ -124,11 +165,11 @@ function Home() {
           >
              <div>
                 <h2 className="inline-block px-4 py-2 bg-[#1dd1a1] text-black text-[10px] font-black uppercase tracking-widest rounded-xl mb-4">Destaque do Mês</h2>
-                <h3 className="text-4xl md:text-[50px] font-black font-impact tracking-tighter uppercase mb-4 italic">{spotlightVehicles[0]?.title || "Porsche 911 GT3 RS"}</h3>
+                <h3 className="text-xl md:text-[50px] font-black font-impact tracking-tighter uppercase mb-4 italic">{spotlightVehicles[0]?.title || "Porsche 911 GT3 RS"}</h3>
                 <p className="font-['Architects_Daughter'] text-2xl text-[#1dd1a1] mb-2">"Venha conferir esse maravilhoso carro!"</p>
              </div>
              <div className="flex flex-col gap-4 min-w-[200px] items-start md:items-end">
-                <span className="text-3xl font-black text-white tracking-widest">{spotlightVehicles[0] ? new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(spotlightVehicles[0].price) : "R$ 1.850.000"}</span>
+                <span className="text-xl font-black text-white tracking-widest">{spotlightVehicles[0] ? new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(spotlightVehicles[0].price) : "R$ 1.850.000"}</span>
                  <div className="relative">
                     <Link to={spotlightVehicles[0] ? `/veiculo/${spotlightVehicles[0].slug || spotlightVehicles[0].id}` : "#"} className="flex items-center justify-center gap-2 px-8 py-5 bg-[#1dd1a1] text-black font-black uppercase text-xs tracking-widest rounded-[20px] hover:bg-[#00f3ff] hover:text-[#555] transition-all group/btn relative z-10 w-full md:w-auto">
                        Falar com Especialista <Play className="w-4 h-4 text-black group-hover/btn:text-[#555] transition-colors" />
@@ -147,9 +188,9 @@ function Home() {
       {/* Featured Showcase Section (Alternating) */}
       <section className="max-w-[1140px] mx-auto px-6 mb-[60px] space-y-40">
         <div className="text-center mb-20 relative">
-           <h2 className="text-4xl md:text-6xl font-black font-impact tracking-tighter uppercase mb-6 italic">Carros Seminovos à Venda: <span className="text-[#1dd1a1]">Curadoria de Alta Performance</span></h2>
+           <h2 className="text-xl md:text-xl font-black font-impact tracking-tighter uppercase mb-6 italic">Carros Seminovos à Venda: <span className="text-[#1dd1a1]">Curadoria de Alta Performance</span></h2>
            <div className="w-24 h-1.5 bg-[#1dd1a1] mx-auto rounded-full mb-6" />
-           <p className="font-['Architects_Daughter'] text-2xl md:text-3xl text-white opacity-60">Você merece o próximo nível.</p>
+           <p className="font-['Architects_Daughter'] text-2xl md:text-xl text-white opacity-60">Você merece o próximo nível.</p>
         </div>
         {(spotlightVehicles.length > 1 ? spotlightVehicles.slice(1, 5) : [
           { id: 'mock1', title: 'Audi RS6 Avant', description: 'Performance e estética com um V8 biturbo brutal.', price: 1200000, km: 0, media: [{url: 'https://images.unsplash.com/photo-1606152421802-db97b9c7a11b?auto=format&fit=crop&q=80&w=2074'}] },
@@ -170,7 +211,7 @@ function Home() {
              </div>
              <div className="flex-1 space-y-6 mt-0 md:mt-[50px]">
                 <span className="text-[10px] font-black uppercase tracking-[0.5em] text-[#1dd1a1] bg-[#1dd1a1]/5 px-5 py-2 rounded-full border border-[#1dd1a1]/10">100% Periciado e Aprovado</span>
-                <h3 className="text-4xl md:text-[50px] font-black font-impact tracking-tighter uppercase leading-[0.9] italic">{vehicle.title} — {vehicle.brand}</h3>
+                <h3 className="text-xl md:text-[50px] font-black font-impact tracking-tighter uppercase leading-[0.9] italic">{vehicle.title} — {vehicle.brand}</h3>
                 <p className="font-['Architects_Daughter'] text-2xl text-[#1dd1a1] opacity-90 leading-relaxed max-w-xl">
                    "Cansado da insegurança ao trocar de carro? Aqui, cada motor V8 é certificado para você acelerar sem medo."
                 </p>
@@ -221,7 +262,7 @@ function Home() {
                   <span className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-[#1dd1a1]/10 text-[#1dd1a1] text-[10px] font-black uppercase tracking-widest border border-[#1dd1a1]/20">
                      <ShieldCheck className="w-4 h-4" /> Vantagens Exclusivas Solara
                   </span>
-                  <h2 className="text-4xl md:text-5xl font-black font-impact tracking-tighter uppercase italic leading-[1] text-white">
+                  <h2 className="text-xl md:text-xl font-black font-impact tracking-tighter uppercase italic leading-[1] text-white">
                      Nós Eliminamos o Risco. <br/>
                      <span className="text-[#1dd1a1]">Paz de Espírito com Laudo Blindado</span>
                   </h2>
@@ -273,7 +314,7 @@ function Home() {
                 <div className="w-16 h-16 bg-white/5 border border-white/10 rounded-2xl flex items-center justify-center mx-auto mb-6 text-[#1dd1a1]">
                    <stat.icon size={28} />
                 </div>
-                <p className="text-4xl font-black text-white font-impact">{stat.value}</p>
+                <p className="text-xl font-black text-white font-impact">{stat.value}</p>
                 <p className="text-[9px] font-black text-[#576574] uppercase tracking-[0.3em]">{stat.label}</p>
              </div>
            ))}
@@ -286,7 +327,7 @@ function Home() {
       {/* Premium Stores Showcase */}
       <section className="max-w-[1140px] mx-auto px-6 py-32 border-t border-white/5 mt-10">
         <div className="text-center mb-16">
-          <h2 className="text-3xl md:text-5xl font-black tracking-tighter uppercase mb-4 font-impact italic">Fale com um Especialista Solara Auto</h2>
+          <h2 className="text-xl md:text-xl font-black tracking-tighter uppercase mb-4 font-impact italic">Fale com um Especialista Solara Auto</h2>
           <h3 className="text-[#576574] font-medium font-['Architects_Daughter'] text-xl">Atendimento Via WhatsApp — Resposta Imediata</h3>
         </div>
         
@@ -306,6 +347,51 @@ function Home() {
           ))}
         </div>
       </section>
+
+      {/* Premium Conversion CTA Section */}
+      <section className="max-w-[1140px] mx-auto px-6 pb-40">
+        <div className="relative w-full rounded-[50px] overflow-hidden bg-gradient-to-r from-[#0d1117] to-[#14181C] border border-[#1dd1a1]/30 p-12 md:p-24 text-center shadow-[0_50px_100px_-20px_rgba(29,209,161,0.15)] group">
+          {/* Decorative background glow */}
+          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[300px] bg-[#1dd1a1]/5 blur-[120px] rounded-full group-hover:bg-[#1dd1a1]/10 transition-colors duration-1000" />
+          
+          <div className="relative z-10 flex flex-col items-center">
+            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-[#1dd1a1]/10 text-[#1dd1a1] text-[10px] font-black uppercase tracking-widest border border-[#1dd1a1]/20 mb-10">
+              <Zap className="w-3" />
+              Agilidade e Sigilo Absoluto
+            </div>
+            
+            <h2 className="text-xl md:text-[40px] font-black font-impact tracking-tighter uppercase mb-6 italic leading-[0.9]">
+              Fale com um Especialista <br />
+              <span className="text-[#1dd1a1]">Solara Auto</span>
+            </h2>
+            
+            <p className="font-['Architects_Daughter'] text-2xl text-white opacity-80 mb-12">
+              "Atendimento Via WhatsApp — Resposta Imediata"
+            </p>
+            
+            <a 
+              href="https://wa.me/5511999999999?text=Olá! Gostaria de uma consultoria premium da Solara Auto."
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center gap-4 px-12 py-[18px] bg-[#1dd1a1] text-black font-black uppercase tracking-widest text-sm rounded-[30px] hover:bg-[#00f3ff] hover:text-[#555] hover:-translate-y-2 hover:shadow-[0_20px_40px_rgba(29,209,161,0.3)] transition-all duration-300 active:scale-95 group/btn"
+            >
+              CONVERSAR AGORA <ArrowRight className="w-5 h-5 group-hover/btn:translate-x-2 transition-transform" />
+            </a>
+            
+            <div className="mt-12 flex items-center gap-8 opacity-40 grayscale group-hover:grayscale-0 transition-all duration-700">
+               <div className="flex items-center gap-2">
+                  <ShieldCheck size={14} className="text-[#1dd1a1]" />
+                  <span className="text-[10px] font-bold uppercase tracking-widest">Segurança 256-bit</span>
+               </div>
+               <div className="flex items-center gap-2">
+                  <Star size={14} className="text-[#1dd1a1]" />
+                  <span className="text-[10px] font-bold uppercase tracking-widest">Atendimento VIP</span>
+               </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
 
 
     </div>

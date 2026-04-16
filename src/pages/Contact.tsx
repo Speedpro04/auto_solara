@@ -10,9 +10,14 @@ function Contact() {
   return (
     <div className="bg-[#0B0E14] min-h-screen text-white pt-40 pb-20 relative overflow-hidden">
       
-      {/* Elementos de fundo */}
+      {/* Elementos de fundo e Turbina */}
       <div className="absolute top-0 left-0 w-[500px] h-[500px] bg-[#1dd1a1]/5 blur-[200px] rounded-full pointer-events-none" />
-      <div className="absolute bottom-0 right-0 w-[800px] h-[600px] bg-[#1dd1a1]/5 blur-[250px] rounded-full pointer-events-none" />
+      <div className="absolute bottom-0 right-0 w-[800px] h-[600px] bg-[#1dd1a1]/5 blur-[250px] rounded-full pointer-events-none z-0" />
+      
+      {/* Turbina Gigante na Base */}
+      <div className="absolute bottom-[320px] left-0 w-full flex justify-center pointer-events-none select-none z-0 opacity-40">
+         <img src="/turbina.png" className="w-[1480px] max-w-none object-contain -rotate-[35deg]" alt="Turbina Solara" />
+      </div>
 
       <div className="max-w-[1140px] mx-auto px-6 relative z-10">
         
@@ -22,7 +27,7 @@ function Contact() {
             <ShieldCheck className="w-3" />
             Atendimento Nível AAA
           </span>
-          <h1 className="text-5xl md:text-7xl font-black font-impact tracking-tighter uppercase mb-6 italic">
+          <h1 className="text-xl md:text-xl font-black font-impact tracking-tighter uppercase mb-6 italic">
             Não Temos Atendentes. <br />
             <span className="text-[#1dd1a1]">Temos Especialistas.</span>
           </h1>
@@ -43,7 +48,7 @@ function Contact() {
               <Phone className="w-8 h-8 text-[#1dd1a1] mb-6" />
               <h3 className="text-2xl font-black uppercase tracking-tighter mb-2 italic">Linha Direta Elite</h3>
               <p className="text-[#8395a7] text-sm font-medium mb-6">Atendimento imediato para negociações em andamento e propostas comerciais.</p>
-              <a href="tel:+5511999999999" className="text-3xl font-black text-white hover:text-[#1dd1a1] transition-colors">
+              <a href="tel:+5511999999999" className="text-xl font-black text-white hover:text-[#1dd1a1] transition-colors">
                 (11) 99999-9999
               </a>
             </div>
@@ -75,7 +80,7 @@ function Contact() {
           {/* Coluna da Direita: Card de Chamada Whatsapp de Conversão Rápida */}
           <div className="bg-gradient-to-br from-[#0d1117] to-[#14181C] border border-[#1dd1a1]/30 rounded-[50px] p-12 relative shadow-[0_30px_60px_-15px_rgba(29,209,161,0.15)] h-full flex flex-col justify-center">
             
-            <h2 className="text-4xl lg:text-5xl font-black font-impact tracking-tighter uppercase italic mb-6">
+            <h2 className="text-xl lg:text-xl font-black font-impact tracking-tighter uppercase italic mb-6">
               O Seu Tempo <br />Não Pode Esperar.
             </h2>
             <p className="font-['Architects_Daughter'] text-xl text-[#1dd1a1] opacity-90 mb-8 rotate-[-2deg]">

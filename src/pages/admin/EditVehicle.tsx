@@ -97,7 +97,7 @@ function AdminEditVehicle() {
         <Link to="/admin/veiculos" className="text-[#A0A0B0] hover:text-white transition">
           <ArrowLeft className="w-6 h-6" />
         </Link>
-        <h1 className="text-4xl font-['Bebas_Neue'] text-white">Editar Veículo</h1>
+        <h1 className="text-xl font-['Bebas_Neue'] text-white">Editar Veículo</h1>
       </div>
 
       {error && (

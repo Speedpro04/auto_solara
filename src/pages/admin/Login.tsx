@@ -55,7 +55,7 @@ function AdminLogin() {
                 />
               </div>
             </div>
-            <h1 className="text-4xl font-black text-white tracking-tighter mb-2 uppercase font-impact italic">
+            <h1 className="text-xl font-black text-white tracking-tighter mb-2 uppercase font-impact italic">
               SOLARA <span className="text-[#1dd1a1]">AUTO</span>
             </h1>
             <p className="text-[#737373] text-[10px] font-black uppercase tracking-[0.3em]">Gestão de Estoque Premium</p>

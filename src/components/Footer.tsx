@@ -14,10 +14,13 @@ function Footer() {
           </p>
         </div>
         
-        <div className="flex flex-wrap justify-center md:justify-end gap-x-10 gap-y-4 text-[10px] sm:text-xs font-black uppercase tracking-[0.3em]">
-          {['Instagram', 'WhatsApp', 'Facebook'].map(social => (
-            <a key={social} href="#" className="text-[#555] hover:text-[#1dd1a1] hover:-translate-y-1 transition-all">{social}</a>
-          ))}
+        <div className="flex flex-col items-center">
+          <img src="/bandeira.png" alt="Bandeira de Corrida" className="w-[145px] object-contain mb-[30px] opacity-80 drop-shadow-[0_0_10px_rgba(29,209,161,0.2)]" />
+          <div className="flex flex-wrap justify-center gap-x-10 gap-y-4 text-[10px] sm:text-xs font-black uppercase tracking-[0.3em]">
+            {['Instagram', 'WhatsApp', 'Facebook'].map(social => (
+              <a key={social} href="#" className="text-[#555] hover:text-[#1dd1a1] hover:-translate-y-1 transition-all">{social}</a>
+            ))}
+          </div>
         </div>
       </div>
       

@@ -100,7 +100,7 @@ function AdminNewVehicle() {
     <div className="max-w-5xl space-y-12 pb-20">
       <div className="flex items-center justify-between">
         <div>
-          <h1 className="text-4xl font-black font-impact text-white tracking-tight uppercase">Novo Patrimônio</h1>
+          <h1 className="text-xl font-black font-impact text-white tracking-tight uppercase">Novo Patrimônio</h1>
           <p className="text-[#576574] text-[10px] mt-2 font-black uppercase tracking-[0.4em]">Curadoria e Cadastro de Elite</p>
         </div>
       </div>

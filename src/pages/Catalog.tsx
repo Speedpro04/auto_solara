@@ -68,7 +68,7 @@ function Catalog() {
       <div className="max-w-[1140px] mx-auto px-6">
         
         <header className="mb-16 text-center relative">
-          <h1 className="text-5xl md:text-7xl font-black font-impact tracking-tighter uppercase mb-6 italic">
+          <h1 className="text-xl md:text-xl font-black font-impact tracking-tighter uppercase mb-6 italic">
             CATÁLOGO <span className="text-[#1dd1a1]">PREMIUM</span>
           </h1>
           <p className="text-[#8395a7] text-xl font-medium max-w-2xl mx-auto mb-6">
@@ -103,7 +103,7 @@ function Catalog() {
                   <div className="absolute top-0 left-0 w-[400px] h-[300px] bg-[#1dd1a1]/5 blur-[120px] rounded-full" />
                   <div className="flex-1 relative z-10">
                     <span className="text-[10px] font-black uppercase tracking-[0.4em] text-[#1dd1a1] block mb-4">Transparência Total</span>
-                    <h2 className="text-3xl md:text-4xl font-black font-impact tracking-tighter uppercase italic mb-4">
+                    <h2 className="text-xl md:text-xl font-black font-impact tracking-tighter uppercase italic mb-4">
                       Cansado de Surpresas <span className="text-[#1dd1a1]">Mecânicas</span> Depois da Compra?
                     </h2>
                     <p className="text-[#8395a7] font-medium text-lg leading-relaxed mb-6">
@@ -143,7 +143,7 @@ function Catalog() {
                 {/* Informações ao lado (ou abaixo no celular) */}
                 <div className="p-8 lg:p-14 flex flex-col justify-center flex-1 space-y-6">
                   <div>
-                    <h3 className="text-3xl md:text-5xl font-black font-impact tracking-tighter uppercase italic">{vehicle.title}</h3>
+                    <h3 className="text-xl md:text-xl font-black font-impact tracking-tighter uppercase italic">{vehicle.title}</h3>
                     <p className="font-['Architects_Daughter'] text-lg text-[#1dd1a1] opacity-80 mt-2">
                       "Sem burocracia. Sem surpresa."
                     </p>
@@ -154,7 +154,7 @@ function Catalog() {
                     <span className="flex items-center gap-2"><Shield size={16} className="text-[#1dd1a1]" /> Garantia Elite</span>
                   </div>
 
-                  <div className="text-4xl md:text-5xl font-black text-[#1dd1a1] tracking-tighter drop-shadow-md">
+                  <div className="text-xl md:text-xl font-black text-[#1dd1a1] tracking-tighter drop-shadow-md">
                     {new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(vehicle.price)}
                   </div>
 
@@ -194,10 +194,10 @@ function Catalog() {
           <div className="mt-20 relative rounded-[45px] overflow-hidden bg-gradient-to-br from-[#0d1117] to-[#0B0E14] border border-[#1dd1a1]/20 p-12 md:p-16 text-center">
             <div className="absolute inset-0 bg-[#1dd1a1]/3 blur-[200px]" />
             <div className="relative z-10">
-              <p className="font-['Architects_Daughter'] text-2xl md:text-3xl text-[#1dd1a1] opacity-80 mb-6 rotate-[-1deg]">
+              <p className="font-['Architects_Daughter'] text-2xl md:text-xl text-[#1dd1a1] opacity-80 mb-6 rotate-[-1deg]">
                 "Não negocie a sua tranquilidade."
               </p>
-              <h2 className="text-3xl md:text-5xl font-black font-impact tracking-tighter uppercase italic mb-6">
+              <h2 className="text-xl md:text-xl font-black font-impact tracking-tighter uppercase italic mb-6">
                 Não achou o que procurava?<br />
                 <span className="text-[#1dd1a1]">Fale com nosso Consultor Elite.</span>
               </h2>
@@ -235,7 +235,7 @@ function Catalog() {
               {/* Header do PopUp */}
               <div className="flex justify-between items-center mb-8 pb-6 border-b border-white/10 shrink-0">
                 <div>
-                   <h3 className="text-2xl md:text-3xl font-black font-impact tracking-tighter uppercase italic">{selectedDescVehicle.title}</h3>
+                   <h3 className="text-2xl md:text-xl font-black font-impact tracking-tighter uppercase italic">{selectedDescVehicle.title}</h3>
                    <span className="text-[10px] text-[#1dd1a1] font-black uppercase tracking-[0.2em]">Inspeção Aprovada Solara</span>
                 </div>
                 <button 

@@ -91,26 +91,26 @@ function SuperAdminDashboard() {
            <div className="bg-[#111] p-8 rounded-[30px] border border-white/5 relative overflow-hidden group">
               <Building2 className="w-8 h-8 text-[#1dd1a1] mb-6" />
               <p className="text-[10px] text-[#555] font-black uppercase tracking-[0.3em] mb-2">Lojas (Inquilinos)</p>
-              <h3 className="text-4xl font-black text-white tracking-tighter">{stats?.total_stores || 0}</h3>
+              <h3 className="text-xl font-black text-white tracking-tighter">{stats?.total_stores || 0}</h3>
            </div>
            
            <div className="bg-[#111] p-8 rounded-[30px] border border-white/5 relative overflow-hidden group">
               <Car className="w-8 h-8 text-white mb-6" />
               <p className="text-[10px] text-[#555] font-black uppercase tracking-[0.3em] mb-2">Total de Veículos na Rede</p>
-              <h3 className="text-4xl font-black text-white tracking-tighter">{stats?.total_vehicles || 0}</h3>
+              <h3 className="text-xl font-black text-white tracking-tighter">{stats?.total_vehicles || 0}</h3>
            </div>
            
            <div className="bg-[#111] p-8 rounded-[30px] border border-white/5 relative overflow-hidden group">
               <Users className="w-8 h-8 text-white mb-6" />
               <p className="text-[10px] text-[#555] font-black uppercase tracking-[0.3em] mb-2">Leads Capturados (Rede)</p>
-              <h3 className="text-4xl font-black text-white tracking-tighter">{stats?.total_leads || 0}</h3>
+              <h3 className="text-xl font-black text-white tracking-tighter">{stats?.total_leads || 0}</h3>
            </div>
 
            <div className="bg-gradient-to-br from-[#1dd1a1]/20 to-[#111] p-8 rounded-[30px] border border-[#1dd1a1]/30 relative overflow-hidden">
               <div className="absolute -top-10 -right-10 w-32 h-32 bg-[#1dd1a1]/20 blur-3xl rounded-full" />
               <DollarSign className="w-8 h-8 text-[#1dd1a1] mb-6 relative z-10" />
               <p className="text-[10px] text-[#1dd1a1] font-black uppercase tracking-[0.3em] mb-2 relative z-10">MRR Estimado</p>
-              <h3 className="text-4xl font-black text-[#1dd1a1] tracking-tighter relative z-10">
+              <h3 className="text-xl font-black text-[#1dd1a1] tracking-tighter relative z-10">
                  {new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(stats?.mrr_estimated || 0)}
               </h3>
            </div>
@@ -118,7 +118,7 @@ function SuperAdminDashboard() {
 
         <div>
            <div className="flex items-center justify-between mb-8">
-              <h2 className="text-3xl font-black text-white uppercase tracking-tighter font-impact italic">Clientes SaaS (Lojistas)</h2>
+              <h2 className="text-xl font-black text-white uppercase tracking-tighter font-impact italic">Clientes SaaS (Lojistas)</h2>
               <button className="px-6 py-3 bg-white/5 text-[#1dd1a1] border border-[#1dd1a1]/20 rounded-xl font-black text-[10px] uppercase tracking-widest hover:bg-[#1dd1a1] hover:text-black transition-all">
                 + Novo Lojista
               </button>

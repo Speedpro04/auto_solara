@@ -107,7 +107,7 @@ function AdminStoreProfile() {
   return (
     <div className="max-w-4xl space-y-12 pb-20">
       <div>
-        <h1 className="text-3xl font-bold text-white tracking-tight">Perfil da Unidade</h1>
+        <h1 className="text-xl font-bold text-white tracking-tight">Perfil da Unidade</h1>
         <p className="text-[#737373] text-sm font-medium mt-1 uppercase tracking-widest">Identidade Visual e Contato</p>
       </div>
 

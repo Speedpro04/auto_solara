@@ -53,7 +53,7 @@ function AdminVehicles() {
     <div className="space-y-8">
       <div className="flex items-center justify-between">
         <div>
-          <h1 className="text-4xl font-black font-impact text-white tracking-tight uppercase">Estoque Ativo</h1>
+          <h1 className="text-xl font-black font-impact text-white tracking-tight uppercase">Estoque Ativo</h1>
           <p className="text-[#576574] text-[10px] mt-2 font-black uppercase tracking-[0.4em]">Gestão de Portfólio</p>
         </div>
         <Link

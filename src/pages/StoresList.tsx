@@ -31,7 +31,7 @@ function StoresList() {
 
   return (
     <div className="max-w-[1140px] mx-auto px-4 sm:px-6 lg:px-8 py-12">
-      <h1 className="text-6xl font-['Bebas_Neue'] text-white mb-8">
+      <h1 className="text-xl font-['Bebas_Neue'] text-white mb-8">
         Todas as <span className="text-[#E84118]">Lojas</span>
       </h1>
 

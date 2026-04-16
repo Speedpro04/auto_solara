@@ -50,7 +50,7 @@ function VehicleDetail() {
       <div className="bg-[#0B0E14] min-h-screen flex items-center justify-center text-white">
         <div className="text-center p-12 bg-white/5 border border-white/10 rounded-[40px] backdrop-blur-3xl">
           <Car className="w-20 h-20 text-[#111] mx-auto mb-6" />
-          <h1 className="text-3xl font-black mb-4 uppercase tracking-tighter">VEÍCULO INDISPONÍVEL</h1>
+          <h1 className="text-xl font-black mb-4 uppercase tracking-tighter">VEÍCULO INDISPONÍVEL</h1>
           <Link to="/" className="text-[#1dd1a1] font-black uppercase tracking-widest text-sm hover:underline">
             ← Voltar para o Estoque Elite
           </Link>
@@ -87,7 +87,7 @@ function VehicleDetail() {
                <span className="inline-flex items-center gap-2 text-[10px] font-black uppercase tracking-[0.4em] text-[#1dd1a1] bg-[#1dd1a1]/5 border border-[#1dd1a1]/20 px-4 py-2 rounded-full">
                  100% Periciado — Pronto para Entrega
                </span>
-               <h1 className="text-4xl md:text-6xl font-black tracking-tighter uppercase font-impact">{vehicle.brand} {vehicle.title}</h1>
+               <h1 className="text-xl md:text-xl font-black tracking-tighter uppercase font-impact">{vehicle.brand} {vehicle.title}</h1>
                <p className="font-['Architects_Daughter'] text-2xl text-[#1dd1a1] opacity-80 italic">
                  "A máquina que você merecia estava esperando aqui."
                </p>
@@ -148,7 +148,7 @@ function VehicleDetail() {
                 <div className="absolute top-0 right-0 w-32 h-32 bg-[#1dd1a1]/5 blur-3xl rounded-full" />
                 
                 <span className="text-[10px] font-black uppercase tracking-[0.4em] text-[#576574] mb-4 block">Oferta de Investimento</span>
-                <div className="text-5xl font-black text-[#1dd1a1] tracking-tighter mb-10 drop-shadow-[0_0_10px_rgba(29,209,161,0.2)]">
+                <div className="text-xl font-black text-[#1dd1a1] tracking-tighter mb-10 drop-shadow-[0_0_10px_rgba(29,209,161,0.2)]">
                   {formatPrice(vehicle.price)}
                 </div>
 
