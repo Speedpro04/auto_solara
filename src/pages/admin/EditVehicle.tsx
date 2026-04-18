@@ -3,7 +3,6 @@ import { useNavigate, useParams } from 'react-router-dom'
 import { ArrowLeft, X, Car } from 'lucide-react'
 import { Link } from 'react-router-dom'
 import api from '../../lib/api'
-import { useAuth } from '../../hooks/useAuth'
 
 function AdminEditVehicle() {
   const { id } = useParams<{ id: string }>()

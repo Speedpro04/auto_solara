@@ -81,7 +81,7 @@ const SecondBrainAuto: React.FC = () => {
             </span>
           </div>
           <div style={{ display: 'flex', gap: '8px' }}>
-             <button style={{ p: '10px', background: 'white/5', borderRadius: '12px', border: 'none', cursor: 'pointer', color: '#444' }}><Share2 size={16} /></button>
+             <button style={{ padding: '10px', background: 'rgba(255, 255, 255, 0.05)', borderRadius: '12px', border: 'none', cursor: 'pointer', color: '#444' }}><Share2 size={16} /></button>
           </div>
         </div>
 
