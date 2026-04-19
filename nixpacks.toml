@@ -1,3 +1,10 @@
 [setup]
-  providers = ["node"]
+  providers = ["node", "python"]
   node_version = "20"
+  python_version = "3.11"
+
+[nixpacks.env]
+  NODE_ENV = "production"
+
+[start]
+  cmd = "pip install --no-cache-dir -r requirements.txt && npm run build && npx vite preview --host 0.0.0.0 --port $PORT"
