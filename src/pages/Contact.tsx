@@ -3,7 +3,7 @@ import { MapPin, Phone, Mail, Clock, ArrowRight, ShieldCheck } from 'lucide-reac
 
 function Contact() {
   useEffect(() => {
-    document.title = "Consultoria Elite | Solara Auto"
+    document.title = "Consultoria Elite | Auto Racer"
   }, [])
 
   return (
@@ -57,8 +57,8 @@ function Contact() {
               <Mail className="w-8 h-8 text-[#1dd1a1] mb-6" />
               <h3 className="text-2xl font-black uppercase tracking-tighter mb-2 italic">Assessoria Documental</h3>
               <p className="text-[#8395a7] text-sm font-medium mb-6">Envio de laudos, propostas de financiamento e vistorias prévias.</p>
-              <a href="mailto:assessoria@solaraauto.com.br" className="text-xl font-bold text-white hover:text-[#1dd1a1] transition-colors break-all">
-                assessoria@solaraauto.com.br
+              <a href="mailto:assessoria@autoracer.com.br" className="text-xl font-bold text-white hover:text-[#1dd1a1] transition-colors break-all">
+assessoria@autoracer.com.br
               </a>
             </div>
 

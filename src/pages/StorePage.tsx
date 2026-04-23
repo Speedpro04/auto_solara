@@ -29,7 +29,7 @@ function StorePage() {
 
         // SEO Dinâmico
         if (storeData) {
-          document.title = `${storeData.name} | Veículos Premium em ${storeData.city || 'Sua Região'} - Solara Auto`;
+          document.title = `${storeData.name} | Veículos Premium em ${storeData.city || 'Sua Região'} - Auto Racer`;
           const metaDesc = document.querySelector('meta[name="description"]');
           if (metaDesc) {
             metaDesc.setAttribute('content', `Confira o estoque exclusivo da ${storeData.name} em ${storeData.city || 'nossa unidade'}. Carros seminovos e motos com garantia, perícia e as melhores taxas de financiamento.`);
@@ -233,7 +233,7 @@ function VehicleCard({ vehicle }: { vehicle: VehicleWithMedia }) {
     >
       <div className="relative h-[280px] overflow-hidden">
         {coverImage ? (
-          <img src={coverImage} alt={`${vehicle.title} ${vehicle.brand} seminovo à venda — Solara Auto`} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-1000" />
+          <img src={coverImage} alt={`${vehicle.title} ${vehicle.brand} seminovo à venda — Auto Racer`} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-1000" />
         ) : (
           <div className="w-full h-full bg-[#000000] flex items-center justify-center"><Car className="w-20 h-20 text-[#111]" /></div>
         )}

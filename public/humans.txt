@@ -1,0 +1,15 @@
+/* TEAM */
+Developer: Auto Racer Development Team
+Contact: assessoria@autoracer.com.br
+Location: Brasil
+
+/* SITE */
+Name: Auto Racer
+Tagline: Mais que veículos, entregamos tranquilidade
+Language: Português (Brasil)
+Built with: React, TypeScript, Vite, Tailwind CSS
+Created: 2024
+
+/* VALUES */
+Mission: Oferecer seminovos e importados de alta performance com laudo cautelar, garantia estendida e financiamento facilitado.
+Goal: Tranquilidade total na compra do seu veículo premium.

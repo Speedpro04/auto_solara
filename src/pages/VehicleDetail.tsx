@@ -16,13 +16,53 @@ function VehicleDetail() {
         const { data } = await api.get(`/vehicles/${slug}`)
         setVehicle(data)
 
-        // SEO Dinâmico do Veículo
         if (data) {
-          document.title = `${data.brand} ${data.title} ${data.year} | Seminovo em ${data.city || 'Estado de Arte'} - Solara Auto`;
+          document.title = `${data.brand} ${data.title} ${data.year} | ${data.km.toLocaleString('pt-BR')}km - Auto Racer`;
           const metaDesc = document.querySelector('meta[name="description"]');
           if (metaDesc) {
-            metaDesc.setAttribute('content', `Compre seu ${data.brand} ${data.title} ${data.year} na Solara Auto. Veículo com ${data.km.toLocaleString('pt-BR')}km, periciado e com garantia. Confira o preço e simule agora.`);
+            metaDesc.setAttribute('content', `Compre ${data.brand} ${data.title} ${data.year} na Auto Racer. ${data.km.toLocaleString('pt-BR')}km, periciado com 120 pontos de inspeção, garantia estendida e financiamento facilitado. ${data.city || 'Entrega para todo Brasil.'}`);
           }
+          
+          const canonical = document.querySelector('link[rel="canonical"]');
+          if (canonical) {
+            canonical.setAttribute('href', `https://auto.axoshub.com/veiculo/${slug}`);
+          }
+
+          let existingJsonLd = document.querySelector('script[data-type="vehicle-jsonld"]');
+          if (existingJsonLd) existingJsonLd.remove();
+
+          const jsonLd = document.createElement('script');
+          jsonLd.type = 'application/ld+json';
+          jsonLd.setAttribute('data-type', 'vehicle-jsonld');
+          jsonLd.textContent = JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "Car",
+            "name": `${data.brand} ${data.title}`,
+            "description": data.description || `Veículo ${data.brand} ${data.title} ${data.year} seminovo com ${data.km.toLocaleString('pt-BR')}km`,
+            "image": data.media?.[0]?.url,
+            "brand": { "@type": "Brand", "name": data.brand },
+            "vehicleModel": data.title,
+            "modelDate": data.year,
+            "mileageFromOdometer": {
+              "@type": "QuantitativeValue",
+              "value": data.km,
+              "unitCode": "KM"
+            },
+            "offers": {
+              "@type": "Offer",
+              "priceCurrency": "BRL",
+              "price": data.price,
+              "priceValidUntil": new Date(Date.now() + 7 * 24 * 60 * 60 * 1000).toISOString().split('T')[0],
+              "availability": "https://schema.org/InStock",
+              "seller": { "@type": "AutoDealer", "name": data.store?.name || "Auto Racer" }
+            },
+            "itemCondition": "https://schema.org/UsedCondition",
+            "location": {
+              "@type": "Place",
+              "name": data.city || "Brasil"
+            }
+          });
+          document.head.appendChild(jsonLd);
         }
       } catch (error) {
         console.error('Erro ao carregar veículo:', error)
@@ -192,7 +232,7 @@ function VehicleDetail() {
                 </div>
                 <div>
                    <span className="block text-[9px] font-black uppercase tracking-widest text-[#576574] mb-1">Anunciado por</span>
-                   <span className="block text-white font-black uppercase tracking-widest">{vehicle.store?.name || 'Unidade Solara Auto'}</span>
+                   <span className="block text-white font-black uppercase tracking-widest">{vehicle.store?.name || 'Unidade Auto Racer'}</span>
                 </div>
              </div>
           </div>

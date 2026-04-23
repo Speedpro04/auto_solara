@@ -1,4 +1,9 @@
 User-agent: *
 Allow: /
+Disallow: /admin/
+Disallow: /super-admin/
+Disallow: /login/
+Disallow: /api/
 
-Sitemap: https://solaraauto.com.br/sitemap.xml
+Sitemap: https://auto.axoshub.com/sitemap.xml
+Host: https://auto.axoshub.com

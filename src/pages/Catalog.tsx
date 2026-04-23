@@ -47,7 +47,11 @@ function Catalog() {
       }
     }
     fetchVehicles()
-    document.title = "Catálogo de Veículos Elite | Solara Auto - Seminovos e Importados"
+    document.title = "Catálogo de Veículos Premium | Seminovos e Importados - Auto Racer";
+    const metaDesc = document.querySelector('meta[name="description"]');
+    if (metaDesc) {
+      metaDesc.setAttribute('content', 'Explore o catálogo completo da Auto Racer com carros seminovos, importados e de luxo. Porsche, Ferrari, Lamborghini, Mercedes-AMG e mais. Garantia, laudo cautelar e financiamento facilitado.');
+    }
   }, [])
 
   const filteredVehicles = vehicles.filter(v => 
@@ -107,7 +111,7 @@ function Catalog() {
                       Cansado de Surpresas <span className="text-[#1dd1a1]">Mecânicas</span> Depois da Compra?
                     </h2>
                     <p className="text-[#8395a7] font-medium text-lg leading-relaxed mb-6">
-                      Na Solara Auto, cada veículo passa por <strong className="text-white">120 pontos de inspeção</strong>. Laudo cautelar completo, histórico e garantia. Zero risco para o seu patrimônio.
+                      Na Auto Racer, cada veículo passa por <strong className="text-white">120 pontos de inspeção</strong>. Laudo cautelar completo, histórico e garantia. Zero risco para o seu patrimônio.
                     </p>
                     <p className="font-['Architects_Daughter'] text-xl text-[#1dd1a1] opacity-80 rotate-[-2deg]">
                       "Sua paz de espírito não tem preço. O nosso laudo, sim."
@@ -127,7 +131,7 @@ function Catalog() {
                 <Link to={`/veiculo/${vehicle.slug}`} className="relative h-[300px] lg:h-[450px] lg:w-1/2 overflow-hidden flex-shrink-0 cursor-pointer block">
                   <img 
                     src={vehicle.media?.[0]?.url || "https://images.unsplash.com/photo-1614162692292-7ac56d7f7f1e"} 
-                    alt={`${vehicle.title} Solara Auto`}
+                    alt={`${vehicle.title} Auto Racer`}
                     className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-1000" 
                   />
                   <div className="absolute top-6 left-6 flex gap-2 flex-col">

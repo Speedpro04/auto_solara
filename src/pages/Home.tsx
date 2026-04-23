@@ -79,11 +79,16 @@ function Home() {
                style={{ boxShadow: 'none' }}
              />
            </div>
-           <button className="w-full md:w-auto px-6 py-2.5 bg-[#1dd1a1] text-black font-black uppercase tracking-widest text-[10px] rounded-full hover:bg-[#00f3ff] hover:text-[#555] transition-all">
-             Buscar
-           </button>
+<button className="w-full md:w-auto px-6 py-2.5 bg-[#1dd1a1] text-black font-black uppercase tracking-widest text-[10px] rounded-full hover:bg-[#00f3ff] hover:text-[#555] transition-all">
+              Buscar
+            </button>
         </div>
       </section>
+
+      {/* H1 SEO - Keyword Principal */}
+      <h1 className="max-w-[1080px] mx-auto px-6 mb-[50px] text-center text-lg md:text-xl lg:text-2xl font-bold text-[#8395a7]">
+        Mais que veículos, entregamos tranquilidade. Encontre o seminovo ou importado perfeito na <span className="text-[#1dd1a1]">Auto Racer</span>
+      </h1>
 
       {/* Dynamic Hero Section with Luxury Flare */}
       <section className="relative pt-24 md:pt-32 pb-32 px-4 overflow-hidden">
@@ -99,24 +104,19 @@ function Home() {
               Experiência Automotiva de Elite 2026
             </div>
             
-            <h1 className="flex flex-col items-center justify-center text-center relative z-10 w-full mb-10">
-              
-              {/* SEO keyword anchor — movido 10px para baixo e com cor cinza mais viva */}
-              <span className="block text-[9px] md:text-[10px] font-black uppercase tracking-[0.4em] text-[#8395a7] mt-[10px] mb-12">
-                Comprar Carro Seminovo e Importado com Garantia | Solara Auto
-              </span>
-              
-              {/* Call to action emocional */}
-              <span className="block text-xl md:text-2xl text-[#1dd1a1] drop-shadow-md font-['Architects_Daughter'] rotate-[-2deg] mb-[30px] z-20">
-                "Aqui não vendemos carros. Entregamos Ativos de Valor."
-              </span>
+<div className="flex flex-col items-center justify-center text-center relative z-10 w-full mb-10">
+               
+               {/* Call to action emocional */}
+               <span className="block text-xl md:text-2xl text-[#1dd1a1] drop-shadow-md font-['Architects_Daughter'] rotate-[-2deg] mb-[30px] z-20">
+                 "Aqui não vendemos carros. Entregamos Ativos de Valor."
+               </span>
               
               {/* HEADLINE PRINCIPAL (Reduzida 20px com espaçamento de 30px no topo) */}
               <span className="block text-[24px] md:text-[25px] lg:text-[55px] font-black font-impact tracking-tighter uppercase italic leading-[0.9] text-white drop-shadow-2xl">
                 MAIS QUE POTÊNCIA,<br />
                 <span className="text-[#1dd1a1] drop-shadow-[0_0_40px_rgba(29,209,161,0.4)]">ESTADO DE ARTE</span>
               </span>
-            </h1>
+            </div>
 
             {/* Texto de Apoio Reduzido (~16px) */}
             <p className="text-[#8395a7] text-sm md:text-base max-w-2xl mx-auto mb-8 font-medium tracking-tight leading-relaxed px-4">
@@ -134,7 +134,7 @@ function Home() {
              <img 
                src={spotlightVehicles[0]?.media?.[0]?.url || "https://images.unsplash.com/photo-1614162692292-7ac56d7f7f1e?auto=format&fit=crop&q=80&w=2070"} 
                className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-[2s]" 
-               alt={`${spotlightVehicles[0]?.title || "Carro de Luxo"} seminovo à venda — Solara Auto`}
+               alt={`${spotlightVehicles[0]?.title || "Carro de Luxo"} seminovo à venda — Auto Racer`}
              />
              {spotlightVehicles[0] && (
                <script type="application/ld+json">
@@ -149,7 +149,7 @@ function Home() {
                      "priceCurrency": "BRL",
                      "price": spotlightVehicles[0].price,
                      "availability": "https://schema.org/InStock",
-                     "seller": { "@type": "AutoDealer", "name": "Solara Auto" }
+                     "seller": { "@type": "AutoDealer", "name": "Auto Racer" }
                    }
                  })}
                </script>
@@ -188,10 +188,11 @@ function Home() {
       {/* Featured Showcase Section (Alternating) */}
       <section className="max-w-[1140px] mx-auto px-6 mb-[60px] space-y-40">
         <div className="text-center mb-20 relative">
-           <h2 className="text-xl md:text-xl font-black font-impact tracking-tighter uppercase mb-6 italic">Carros Seminovos à Venda: <span className="text-[#1dd1a1]">Curadoria de Alta Performance</span></h2>
-           <div className="w-24 h-1.5 bg-[#1dd1a1] mx-auto rounded-full mb-6" />
-           <p className="font-['Architects_Daughter'] text-2xl md:text-xl text-white opacity-60">Você merece o próximo nível.</p>
-        </div>
+<h2 className="text-xl md:text-xl font-black font-impact tracking-tighter uppercase mb-6 italic">Carros Seminovos à Venda: <span className="text-[#1dd1a1]">Curadoria de Alta Performance</span></h2>
+            <div className="w-24 h-1.5 bg-[#1dd1a1] mx-auto rounded-full mb-6" />
+            <p className="font-['Architects_Daughter'] text-2xl md:text-xl text-white opacity-60">Você merece o próximo nível.</p>
+            <p className="text-[#576574] text-sm mt-4">Explore nossa curadoria de carros seminovos, importados e usados com laudo cautelar e garantia estendida. Veículos de alta performance com financiamento facilitado.</p>
+         </div>
         {(spotlightVehicles.length > 1 ? spotlightVehicles.slice(1, 5) : [
           { id: 'mock1', title: 'Audi RS6 Avant', description: 'Performance e estética com um V8 biturbo brutal.', price: 1200000, km: 0, media: [{url: 'https://images.unsplash.com/photo-1606152421802-db97b9c7a11b?auto=format&fit=crop&q=80&w=2074'}] },
           { id: 'mock2', title: 'Mercedes AMG GT', description: 'O puro estado da arte das pistas para as ruas.', price: 1550000, km: 500, media: [{url: 'https://images.unsplash.com/photo-1618843479313-40f8afb4b4d8?auto=format&fit=crop&q=80&w=2070'}] },
@@ -205,7 +206,7 @@ function Home() {
                    <img 
                     src={vehicle.media?.[0]?.url} 
                     className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-[1.5s]" 
-                    alt={`${vehicle.title} seminovo à venda com garantia — Solara Auto`}
+                    alt={`${vehicle.title} seminovo à venda com garantia — Auto Racer`}
                    />
                 </div>
              </div>
@@ -327,7 +328,7 @@ function Home() {
       {/* Premium Stores Showcase */}
       <section className="max-w-[1140px] mx-auto px-6 py-32 border-t border-white/5 mt-10">
         <div className="text-center mb-16">
-          <h2 className="text-xl md:text-xl font-black tracking-tighter uppercase mb-4 font-impact italic">Fale com um Especialista Solara Auto</h2>
+          <h2 className="text-xl md:text-xl font-black tracking-tighter uppercase mb-4 font-impact italic">Fale com um Especialista Auto Racer</h2>
           <h3 className="text-[#576574] font-medium font-['Architects_Daughter'] text-xl">Atendimento Via WhatsApp — Resposta Imediata</h3>
         </div>
         
@@ -362,7 +363,7 @@ function Home() {
             
             <h2 className="text-xl md:text-[40px] font-black font-impact tracking-tighter uppercase mb-6 italic leading-[0.9]">
               Fale com um Especialista <br />
-              <span className="text-[#1dd1a1]">Solara Auto</span>
+              <span className="text-[#1dd1a1]">Auto Racer</span>
             </h2>
             
             <p className="font-['Architects_Daughter'] text-2xl text-white opacity-80 mb-12">
@@ -370,7 +371,7 @@ function Home() {
             </p>
             
             <a 
-              href="https://wa.me/5511999999999?text=Olá! Gostaria de uma consultoria premium da Solara Auto."
+              href="https://wa.me/5511999999999?text=Olá! Gostaria de uma consultoria premium da Auto Racer."
               target="_blank"
               rel="noopener noreferrer"
               className="flex items-center gap-4 px-12 py-[18px] bg-[#1dd1a1] text-black font-black uppercase tracking-widest text-sm rounded-[30px] hover:bg-[#00f3ff] hover:text-[#555] hover:-translate-y-2 hover:shadow-[0_20px_40px_rgba(29,209,161,0.3)] transition-all duration-300 active:scale-95 group/btn"

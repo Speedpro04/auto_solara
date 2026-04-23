@@ -4,7 +4,11 @@ import { ArrowRight } from 'lucide-react'
 
 function AboutUs() {
   useEffect(() => {
-    document.title = "Nossa História | Solara Auto - Elite Performance"
+    document.title = "Nossa História | Auto Racer - Concessionária de Carros de Luxo";
+    const metaDesc = document.querySelector('meta[name="description"]');
+    if (metaDesc) {
+      metaDesc.setAttribute('content', 'Conheça a Auto Racer: especializada em carros seminovos, importados e de luxo. 120 pontos de inspeção, garantia estendida e financiamento facilitado.');
+    }
   }, [])
 
   return (
@@ -17,7 +21,7 @@ function AboutUs() {
           <img 
             src="/logo/imagem 02.png" 
             onError={(e) => { e.currentTarget.src = "https://images.unsplash.com/photo-1618843479313-40f8afb4b4d8?auto=format&fit=crop&w=2000&q=80" }} // Fallback
-            alt="Solara Auto Asset" 
+            alt="Auto Racer Asset" 
             className="w-full h-full object-cover grayscale-[0.3]"
           />
           {/* Dark Overlay for Text Readability */}
