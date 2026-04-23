@@ -65,7 +65,7 @@ function AboutUs() {
               Nossa <span className="text-[#1dd1a1]">Garantia</span> Exclusiva.
             </h3>
             <p className="text-[#8395a7] text-lg font-medium leading-relaxed">
-              Nós criamos a Solara para que você compre seu próximo grande <span className="text-[#1dd1a1] font-bold">ATIVO</span> sem levantar do sofá. Invertemos o jogo: nós assumimos todo o risco de avaliação.
+              Nós criamos a Auto Racer para que você compre seu próximo grande <span className="text-[#1dd1a1] font-bold">ATIVO</span> sem levantar do sofá. Invertemos o jogo: nós assumimos todo o risco de avaliação.
             </p>
             <p className="text-white text-xl font-bold leading-relaxed border-l-4 border-[#1dd1a1] pl-6 italic">
               Honradez inegociável, qualidade cirúrgica e vistoria impecável. Entregamos a máquina perfeita na porta da sua casa.

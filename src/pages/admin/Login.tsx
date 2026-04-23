@@ -97,7 +97,7 @@ function AdminLogin() {
                 <div className="absolute inset-0 bg-[#1dd1a1]/20 blur-xl rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
                 <img 
                   src="/logo-auto-principal.png" 
-                  alt="Solara Auto" 
+                  alt="Auto Racer" 
                   className="w-[156px] h-[124px] object-contain rounded-2xl relative z-10 border border-white/10 shadow-2xl"
                 />
               </div>

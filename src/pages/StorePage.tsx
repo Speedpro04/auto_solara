@@ -105,11 +105,11 @@ function StorePage() {
             <h1 className="text-xl md:text-xl font-black font-impact tracking-tighter uppercase mb-4">{store.name}</h1>
             <div className="flex flex-wrap items-center justify-center md:justify-start gap-6 text-[10px] font-black uppercase tracking-widest text-[#576574] mb-6">
                <span className="flex items-center gap-2"><MapPin className="w-4 h-4 text-[#1dd1a1]" /> {store.city || 'Matriz Premium'}</span>
-               <span className="flex items-center gap-2"><ShieldCheck className="w-4 h-4 text-[#1dd1a1]" /> Certificada Solara</span>
+               <span className="flex items-center gap-2"><ShieldCheck className="w-4 h-4 text-[#1dd1a1]" /> Certificada Auto Racer</span>
             </div>
             
             <p className="text-[#8395a7] font-medium leading-relaxed max-w-2xl mb-8">
-              {store.about_text || `Bem-vindo à ${store.name}. Nossa unidade em ${store.city || 'sua região'} é especializada em veículos de altíssima performance, todos revisados e com garantia Solara.`}
+              {store.about_text || `Bem-vindo à ${store.name}. Nossa unidade em ${store.city || 'sua região'} é especializada em veículos de altíssima performance, todos revisados e com garantia Auto Racer.`}
             </p>
 
             <div className="flex flex-wrap items-center justify-center md:justify-start gap-4">
@@ -195,7 +195,7 @@ function StorePage() {
 
         {/* Vehicles Grid */}
         <div className="mb-8">
-           <h2 className="text-xl font-black tracking-tighter font-impact uppercase mb-4">Veja Nosso Estoque de Seminovos em {store.city || 'Unidade Solara'}</h2>
+           <h2 className="text-xl font-black tracking-tighter font-impact uppercase mb-4">Veja Nosso Estoque de Seminovos em {store.city || 'Unidade Auto Racer'}</h2>
            <div className="w-16 h-1 bg-[#1dd1a1] mb-10" />
         </div>
 

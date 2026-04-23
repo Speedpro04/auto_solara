@@ -66,7 +66,7 @@ function AdminDashboard() {
           </h1>
           <p className="text-[#576574] text-[10px] mt-4 font-black uppercase tracking-[0.5em] flex items-center gap-3">
              <Activity className="w-3 h-3 text-[#1dd1a1] animate-pulse" />
-             Ecossistema Solara Auto Intelligence v4.0
+             Ecossistema Auto Racer Intelligence v4.0
           </p>
         </div>
         <div className="flex items-center gap-4">

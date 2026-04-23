@@ -21,7 +21,7 @@ function AdminSidebar() {
              <div className="absolute inset-0 bg-[#1dd1a1]/20 blur-xl rounded-full opacity-0 group-hover:opacity-100 transition-all duration-700" />
              <img 
                src="/logo-auto-principal.png" 
-               alt="Solara Auto" 
+               alt="Auto Racer" 
                className="w-20 h-14 object-contain rounded-xl border border-white/10 relative z-10 shadow-2xl"
              />
           </div>

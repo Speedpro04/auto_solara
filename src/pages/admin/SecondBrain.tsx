@@ -130,7 +130,7 @@ const SecondBrainAuto: React.FC = () => {
 
           {/* Luxury Badge */}
           <div style={{ background: 'linear-gradient(135deg, #111, #000)', borderRadius: '32px', padding: '32px', marginTop: 'auto', textAlign: 'center', border: '1px solid rgba(255,255,255,0.05)', boxShadow: '0 20px 40px rgba(0,0,0,0.5)' }}>
-            <img src="/logo-auto-principal.png" alt="Solara Auto" style={{ width: '140px', margin: '0 auto 20px', borderRadius: '16px', border: '1px solid rgba(255,255,255,0.05)', objectFit: 'contain' }} />
+            <img src="/logo-auto-principal.png" alt="Auto Racer" style={{ width: '140px', margin: '0 auto 20px', borderRadius: '16px', border: '1px solid rgba(255,255,255,0.05)', objectFit: 'contain' }} />
             <div style={{ width: '40px', height: '2px', background: '#1dd1a1', margin: '0 auto 16px' }} />
             <span style={{ fontSize: '10px', fontWeight: 900, textTransform: 'uppercase', letterSpacing: '0.4em', color: 'white' }}>Solara</span>
             <span style={{ fontSize: '10px', fontWeight: 900, textTransform: 'uppercase', letterSpacing: '0.4em', color: '#1dd1a1' }}> Auto</span>

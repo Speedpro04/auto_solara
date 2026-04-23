@@ -240,7 +240,7 @@ function Catalog() {
               <div className="flex justify-between items-center mb-8 pb-6 border-b border-white/10 shrink-0">
                 <div>
                    <h3 className="text-2xl md:text-xl font-black font-impact tracking-tighter uppercase italic">{selectedDescVehicle.title}</h3>
-                   <span className="text-[10px] text-[#1dd1a1] font-black uppercase tracking-[0.2em]">Inspeção Aprovada Solara</span>
+                   <span className="text-[10px] text-[#1dd1a1] font-black uppercase tracking-[0.2em]">Inspeção Aprovada Auto Racer</span>
                 </div>
                 <button 
                   onClick={() => setSelectedDescVehicle(null)}

@@ -27,7 +27,7 @@ function Header() {
           <Link to="/" className="flex items-center gap-3 transition-transform hover:scale-105 active:scale-95">
             <img 
               src="/logo-auto-principal.png" 
-              alt="Solara Auto" 
+              alt="Auto Racer" 
               className="w-[86px] h-[70px] object-contain rounded-xl shadow-[0_0_20px_rgba(29,209,161,0.2)]" 
             />
             <span className="text-xl md:text-2xl font-black text-white tracking-[0.2em] font-['Architects_Daughter'] uppercase">

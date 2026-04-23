@@ -267,14 +267,14 @@ function Home() {
             <div className="relative z-10 flex flex-col md:flex-row items-center justify-between gap-12">
                <div className="flex-1 space-y-6">
                   <span className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-[#1dd1a1]/10 text-[#1dd1a1] text-[10px] font-black uppercase tracking-widest border border-[#1dd1a1]/20">
-                     <ShieldCheck className="w-4 h-4" /> Vantagens Exclusivas Solara
+                     <ShieldCheck className="w-4 h-4" /> Vantagens Exclusivas Auto Racer
                   </span>
                   <h2 className="text-xl md:text-xl font-black font-impact tracking-tighter uppercase italic leading-[1] text-white">
                      Nós Eliminamos o Risco. <br/>
                      <span className="text-[#1dd1a1]">Paz de Espírito com Laudo Blindado</span>
                   </h2>
                   <p className="text-[#8395a7] font-medium leading-relaxed max-w-xl text-lg">
-                     Comprar um veículo de luxo não deveria ser um jogo de sorte. Surpresas mecânicas e desvalorização oculta não farão parte da sua história. Desfrute da exclusividade com a nossa <span className="text-white font-bold">Garantia Estendida Solara</span>.
+                     Comprar um veículo de luxo não deveria ser um jogo de sorte. Surpresas mecânicas e desvalorização oculta não farão parte da sua história. Desfrute da exclusividade com a nossa <span className="text-white font-bold">Garantia Estendida Auto Racer</span>.
                   </p>
                   <div className="flex flex-col sm:flex-row gap-6 pt-4">
                      <div className="flex items-center gap-3">

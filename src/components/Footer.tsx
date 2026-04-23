@@ -5,7 +5,7 @@ function Footer() {
       <div className="max-w-[1140px] mx-auto border-t border-white/10 pt-16 flex flex-col md:flex-row items-center justify-between gap-10 text-left">
         <div className="flex flex-col items-center md:items-start text-center md:text-left">
           <div className="flex items-center gap-4 mb-4">
-            <img src="/logo-auto-principal.png" alt="Solara Auto" className="w-[120px] object-contain drop-shadow-[0_0_15px_rgba(29,209,161,0.2)]" />
+            <img src="/logo-auto-principal.png" alt="Auto Racer" className="w-[120px] object-contain drop-shadow-[0_0_15px_rgba(29,209,161,0.2)]" />
             <span className="text-3xl md:text-4xl font-black tracking-[0.2em] font-['Architects_Daughter'] uppercase">SOLARA <span className="text-[#1dd1a1]">AUTO</span></span>
           </div>
           <p className="text-[#576574] text-sm max-w-sm mb-6 font-medium leading-relaxed italic">
@@ -24,7 +24,7 @@ function Footer() {
       </div>
       
       <div className="max-w-[1140px] mx-auto mt-12 border-t border-white/5 pt-8 flex flex-col sm:flex-row items-center justify-between gap-4">
-         <p className="text-[#333] text-[9px] font-black uppercase tracking-[0.5em]">© 2026 Solara Auto — Intelligence System</p>
+         <p className="text-[#333] text-[9px] font-black uppercase tracking-[0.5em]">© 2026 Auto Racer — Intelligence System</p>
          <div className="text-[#333] text-[9px] font-black uppercase tracking-[0.3em] flex gap-4">
             <a href="#" className="hover:text-[#1dd1a1]">Privacidade</a>
             <a href="#" className="hover:text-[#1dd1a1]">Termos</a>

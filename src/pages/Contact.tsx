@@ -15,7 +15,7 @@ function Contact() {
       
       {/* Turbina Gigante na Base */}
       <div className="absolute bottom-[320px] left-0 w-full flex justify-center pointer-events-none select-none z-0 opacity-40">
-         <img src="/turbina.png" className="w-[1480px] max-w-none object-contain -rotate-[35deg]" alt="Turbina Solara" />
+         <img src="/turbina.png" className="w-[1480px] max-w-none object-contain -rotate-[35deg]" alt="Turbina Auto Racer" />
       </div>
 
       <div className="max-w-[1140px] mx-auto px-6 relative z-10">
@@ -91,7 +91,7 @@ assessoria@autoracer.com.br
             </p>
 
             <a 
-              href="https://wa.me/5511999999999?text=Olá! Preciso da consultoria de um especialista Solara."
+              href="https://wa.me/5511999999999?text=Olá! Preciso da consultoria de um especialista Auto Racer."
               target="_blank"
               rel="noopener noreferrer"
               className="w-full flex items-center justify-center gap-4 py-8 bg-[#1dd1a1] text-black font-black uppercase tracking-widest text-sm rounded-[30px] hover:bg-white hover:-translate-y-2 hover:shadow-[0_20px_40px_rgba(29,209,161,0.3)] transition-all duration-300"
