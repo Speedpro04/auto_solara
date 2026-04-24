@@ -101,7 +101,7 @@ function AdminNewVehicle() {
     <div className="max-w-5xl space-y-12 pb-20">
       <div className="flex items-center justify-between">
         <div>
-          <h1 className="text-xl font-black font-impact text-white tracking-tight uppercase">Novo Patrimônio</h1>
+          <h1 className="text-xl font-black font-impact text-black tracking-tight uppercase">Novo Patrimônio</h1>
           <p className="text-[#576574] text-[10px] mt-2 font-black uppercase tracking-[0.4em]">Curadoria e Cadastro de Elite</p>
         </div>
       </div>
@@ -109,7 +109,7 @@ function AdminNewVehicle() {
       <form onSubmit={handleSubmit} className="space-y-10">
         
         {/* Step 1: Media Upload System */}
-        <section className="bg-[#14181C] rounded-[40px] border border-[#1dd1a1]/20 p-10 shadow-2xl overflow-hidden relative">
+        <section className="bg-[#2d3436] rounded-[40px] border border-[#1dd1a1]/20 p-10 shadow-2xl overflow-hidden relative">
           <div className="absolute top-0 right-0 w-64 h-64 bg-[#1dd1a1]/5 blur-[100px] rounded-full" />
           
           <div className="flex items-center gap-4 mb-10">
@@ -155,7 +155,7 @@ function AdminNewVehicle() {
         </section>
 
         {/* Step 2: Details */}
-        <section className="bg-[#14181C] rounded-[40px] border border-white/5 p-10 shadow-2xl space-y-12">
+        <section className="bg-[#2d3436] rounded-[40px] border border-white/5 p-10 shadow-2xl space-y-12">
            <div className="flex items-center gap-4">
              <div className="p-3 bg-white/5 border border-white/10 rounded-2xl text-[#1dd1a1]"><Info className="w-6 h-6" /></div>
              <h2 className="text-2xl font-black uppercase tracking-tighter font-impact text-white">Especificações Técnicas</h2>

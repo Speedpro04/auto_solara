@@ -27,22 +27,26 @@ async def tenant_middleware(request: Request, call_next):
     else:
         # Extrair do host (ex: loja.solaraauto.com.br -> loja ou loja.localhost -> loja)
         parts = host.split(".")
-        if len(parts) >= 2:
-            subdomain = parts[0]
-            if subdomain not in ["www", "localhost", "127", "0"]:
-                response = supabase.table("stores").select("id, slug, active").eq("slug", subdomain).execute()
-                if response.data:
-                    store = response.data[0]
-                    store_id = store["id"]
+        subdomain = parts[0] if len(parts) >= 2 else None
+        
+        # Se for localhost ou não houver subdomínio, forçar a loja 'auto-r' para manutenção
+        if not subdomain or subdomain in ["www", "localhost", "127", "0"]:
+            subdomain = "auto-r"
+            
+        response = supabase.table("stores").select("id, slug, active").eq("slug", subdomain).execute()
+        if response.data:
+            store = response.data[0]
+            store_id = store["id"]
 
     # Injetar store_id no state da request
     request.state.store_id = store_id
     request.state.store = store
 
     # Para rotas públicas, verificar se a loja existe e está ativa
-    if not request.url.path.startswith("/admin") and not request.url.path.startswith("/health"):
-        if store and not store.get("active"):
-            raise HTTPException(status_code=403, detail="Loja não está ativa")
+    # Temporariamente desativado para revisão do usuário
+    # if not request.url.path.startswith("/admin") and not request.url.path.startswith("/health"):
+    #     if store and not store.get("active"):
+    #         raise HTTPException(status_code=403, detail="Loja não está ativa")
 
     response = await call_next(request)
     return response

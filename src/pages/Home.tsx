@@ -189,9 +189,16 @@ function Home() {
                 <div className="relative h-[320px] w-full rounded-[45px] overflow-hidden border border-[#1dd1a1] shadow-2xl">
                    <img 
                     src={vehicle.media?.[0]?.url} 
-                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-[1.5s]" 
+                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-[1.5s] relative z-10" 
                     alt={`${vehicle.title} seminovo à venda com garantia — Auto Racer`}
                    />
+                   
+                   {/* Logo Watermark */}
+                   {(vehicle.stores?.logo_url || vehicle.store?.logo_url) && (
+                     <div className="absolute bottom-6 right-6 z-20 pointer-events-none opacity-50 transition-opacity group-hover:opacity-100">
+                       <img src={vehicle.stores?.logo_url || vehicle.store?.logo_url} alt="" className="w-16 h-16 object-contain drop-shadow-2xl" />
+                     </div>
+                   )}
                 </div>
              </div>
              <div className="flex-1 space-y-6 mt-0 md:mt-[50px]">

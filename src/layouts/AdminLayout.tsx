@@ -19,7 +19,7 @@ function AdminLayout() {
   }
 
   return (
-    <div className="min-h-screen flex bg-[#0A0A0A]">
+    <div className="min-h-screen flex bg-[#d2dae2]">
       <AdminSidebar />
       <div className="flex-1 flex flex-col">
         <AdminHeader />

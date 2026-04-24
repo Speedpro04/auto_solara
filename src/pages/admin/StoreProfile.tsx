@@ -107,7 +107,7 @@ function AdminStoreProfile() {
   return (
     <div className="max-w-4xl space-y-12 pb-20">
       <div>
-        <h1 className="text-xl font-bold text-white tracking-tight">Perfil da Unidade</h1>
+        <h1 className="text-xl font-bold text-black tracking-tight">Perfil da Unidade</h1>
         <p className="text-[#737373] text-sm font-medium mt-1 uppercase tracking-widest">Identidade Visual e Contato</p>
       </div>
 
@@ -125,7 +125,7 @@ function AdminStoreProfile() {
 
       <form onSubmit={handleSubmit} className="space-y-10">
         {/* Branding Section */}
-        <section className="bg-[#14181C] rounded-[15px] border border-[#1dd1a1]/30 p-8 shadow-2xl">
+        <section className="bg-[#2d3436] rounded-[15px] border border-white/5 p-8 shadow-2xl">
           <div className="flex items-center gap-3 mb-8">
             <div className="w-10 h-10 rounded-xl bg-[#1dd1a1]/10 flex items-center justify-center">
               <Building2 className="w-5 h-5 text-[#1dd1a1]" />
@@ -172,7 +172,7 @@ function AdminStoreProfile() {
         </section>
 
         {/* Info Section */}
-        <section className="bg-[#14181C] rounded-[15px] border border-[#1dd1a1]/30 p-8 shadow-2xl">
+        <section className="bg-[#2d3436] rounded-[15px] border border-white/5 p-8 shadow-2xl">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
             <div className="md:col-span-2">
               <label className="flex items-center gap-2 text-[10px] font-black uppercase tracking-widest text-[#737373] mb-3">

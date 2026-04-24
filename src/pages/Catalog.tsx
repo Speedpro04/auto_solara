@@ -142,6 +142,13 @@ function Catalog() {
                       100% Periciado
                     </span>
                   </div>
+
+                  {/* Logo Watermark */}
+                  {(vehicle.stores?.logo_url || vehicle.store?.logo_url) && (
+                    <div className="absolute bottom-6 right-6 z-20 pointer-events-none opacity-50 transition-opacity group-hover:opacity-100">
+                      <img src={vehicle.stores?.logo_url || vehicle.store?.logo_url} alt="" className="w-20 h-20 object-contain drop-shadow-2xl" />
+                    </div>
+                  )}
                 </Link>
                 
                 {/* Informações ao lado (ou abaixo no celular) */}

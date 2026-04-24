@@ -1,11 +1,12 @@
 import { Link, useLocation } from 'react-router-dom'
-import { LayoutDashboard, Car, Settings, LogOut, BrainCircuit, ShieldAlert } from 'lucide-react'
+import { LayoutDashboard, Car, Settings, LogOut, BrainCircuit, ShieldAlert, BarChart } from 'lucide-react'
 import { useAuth } from '../../hooks/useAuth'
 
 const menuItems = [
   { icon: LayoutDashboard, label: 'Dashboard', path: '/admin' },
   { icon: BrainCircuit, label: 'Second Brain', path: '/admin/second-brain' },
   { icon: Car, label: 'Frota Elite', path: '/admin/veiculos' },
+  { icon: BarChart, label: 'Relatórios', path: '/admin/relatorios' },
   { icon: Settings, label: 'Perfil Store', path: '/admin/loja' },
 ]
 
@@ -14,7 +15,7 @@ function AdminSidebar() {
   const { logout } = useAuth()
 
   return (
-    <aside className="w-72 bg-[#050505] border-r border-white/5 min-h-screen flex flex-col sticky top-0 z-50">
+    <aside className="w-72 bg-[#2d3436] border-r border-white/5 min-h-screen flex flex-col sticky top-0 z-50">
       <div className="p-10 border-b border-white/5">
         <Link to="/admin" className="flex flex-col gap-4">
           <div className="relative group">

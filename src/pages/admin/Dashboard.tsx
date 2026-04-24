@@ -61,7 +61,7 @@ function AdminDashboard() {
     >
       <div className="flex flex-col md:flex-row md:items-center justify-between gap-6">
         <div>
-          <h1 className="text-xl font-black font-impact text-white tracking-tight uppercase italic leading-none">
+          <h1 className="text-xl font-black font-impact text-black tracking-tight uppercase italic leading-none">
             Visão <span className="text-[#1dd1a1]">Geral</span>
           </h1>
           <p className="text-[#576574] text-[10px] mt-4 font-black uppercase tracking-[0.5em] flex items-center gap-3">
@@ -72,7 +72,7 @@ function AdminDashboard() {
         <div className="flex items-center gap-4">
           <Link
             to="/admin/second-brain"
-            className="flex items-center gap-2 bg-white/5 border border-white/10 text-white px-6 py-4 rounded-2xl hover:bg-white/10 transition-all duration-300 font-black uppercase tracking-widest text-[10px]"
+            className="flex items-center gap-2 bg-[#171717] border border-white/10 text-white px-6 py-4 rounded-2xl hover:bg-black transition-all duration-300 font-black uppercase tracking-widest text-[10px]"
           >
             <BrainCircuit className="w-4 h-4 text-[#1dd1a1]" />
             Brain Explorer
@@ -93,7 +93,7 @@ function AdminDashboard() {
           <motion.div 
             key={i} 
             variants={itemVariants}
-            className="bg-[#111] p-8 rounded-[35px] border border-white/5 shadow-2xl relative group overflow-hidden"
+            className="bg-[#2d3436] p-8 rounded-[35px] border border-white/5 shadow-2xl relative group overflow-hidden"
           >
             <div className="absolute top-0 right-0 w-32 h-32 bg-[#1dd1a1]/5 -mr-16 -mt-16 rounded-full blur-3xl group-hover:bg-[#1dd1a1]/15 transition-all duration-500" />
             <div className="flex items-center justify-between mb-8">
@@ -122,11 +122,11 @@ function AdminDashboard() {
         {/* Recent Activity Mini-List */}
         <motion.div 
           variants={itemVariants}
-          className="lg:col-span-2 bg-[#111] rounded-[40px] border border-white/5 overflow-hidden shadow-2xl"
+          className="lg:col-span-2 bg-[#2d3436] rounded-[40px] border border-white/5 overflow-hidden shadow-2xl"
         >
           <div className="p-10 border-b border-white/5 flex items-center justify-between bg-black/40">
             <div>
-              <h2 className="text-2xl font-black uppercase tracking-tighter flex items-center gap-4 font-impact italic">
+              <h2 className="text-2xl font-black uppercase tracking-tighter flex items-center gap-4 font-impact text-black italic">
                  <Clock className="w-6 h-6 text-[#1dd1a1]" /> Últimas Inserções
               </h2>
               <p className="text-[9px] font-black text-[#444] uppercase tracking-[0.4em] mt-2">Update sincronizado em tempo real</p>

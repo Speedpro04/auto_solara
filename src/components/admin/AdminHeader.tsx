@@ -5,17 +5,17 @@ function AdminHeader() {
   const { user } = useAuth()
 
   return (
-    <header className="bg-black/60 backdrop-blur-3xl border-b border-white/5 px-10 py-5 sticky top-0 z-40">
+    <header className="bg-[#d2dae2] border-b-2 border-[#2d3436] px-10 py-5 sticky top-0 z-40">
       <div className="flex items-center justify-between">
         <div className="flex items-center gap-10">
           <div className="hidden lg:flex items-center gap-4">
              <div className="flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/5 border border-white/5">
                 <div className="w-1.5 h-1.5 rounded-full bg-[#1dd1a1] animate-pulse" />
-                <span className="text-[9px] font-black text-[#576574] uppercase tracking-widest">Polars: Active</span>
+                <span className="text-[11px] font-black text-[#2d3436] uppercase tracking-widest">Polars: Active</span>
              </div>
              <div className="flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/5 border border-white/5">
                 <div className="w-1.5 h-1.5 rounded-full bg-[#3b82f6] shadow-[0_0_10px_rgba(59,130,246,0.5)]" />
-                <span className="text-[9px] font-black text-[#576574] uppercase tracking-widest">Brain: Sync</span>
+                <span className="text-[11px] font-black text-[#2d3436] uppercase tracking-widest">Brain: Sync</span>
              </div>
           </div>
           <div className="relative hidden md:block group">
@@ -23,7 +23,7 @@ function AdminHeader() {
             <input 
               type="text" 
               placeholder="Buscar no sistema..." 
-              className="bg-[#0A0A0A] border border-white/5 rounded-full py-2.5 pl-12 pr-6 text-xs text-white placeholder:text-[#333] outline-none focus:border-[#1dd1a1]/30 w-64 transition-all"
+              className="bg-[#2d3436] border border-[#2d3436] rounded-full py-3 pl-12 pr-6 text-sm font-black text-white placeholder:text-[#8395a7] outline-none focus:border-[#1dd1a1]/50 w-72 transition-all shadow-md"
             />
           </div>
         </div>
@@ -41,10 +41,10 @@ function AdminHeader() {
           
           <div className="flex items-center gap-4 group cursor-pointer">
             <div className="text-right">
-              <span className="block text-[10px] font-black text-white uppercase tracking-widest leading-none">
+              <span className="block text-xs font-black text-black uppercase tracking-widest leading-none">
                 {user?.name || 'Administrador'}
               </span>
-              <span className="text-[8px] font-black text-[#1dd1a1] uppercase tracking-[0.2em] mt-1 block">
+              <span className="text-[10px] font-black text-[#1dd1a1] uppercase tracking-[0.2em] mt-1.5 block">
                 Plano Enterprise
               </span>
             </div>

@@ -91,10 +91,10 @@ function AdminEditVehicle() {
   return (
     <div>
       <div className="flex items-center gap-4 mb-8">
-        <Link to="/admin/veiculos" className="text-[#A0A0B0] hover:text-white transition">
+        <Link to="/admin/veiculos" className="text-[#444] hover:text-black transition">
           <ArrowLeft className="w-6 h-6" />
         </Link>
-        <h1 className="text-xl font-['Bebas_Neue'] text-white">Editar Veículo</h1>
+        <h1 className="text-xl font-impact text-black uppercase tracking-tight">Editar Veículo</h1>
       </div>
 
       {error && (
@@ -106,13 +106,13 @@ function AdminEditVehicle() {
       <form onSubmit={handleSubmit} className="space-y-6">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           <div className="md:col-span-2">
-            <label className="block text-sm text-[#A0A0B0] mb-2">Título do Anúncio *</label>
+            <label className="block text-sm text-[#A0A0B0] mb-2 font-black uppercase tracking-widest text-[10px]">Título do Anúncio *</label>
             <input
               type="text"
               name="title"
               value={formData.title}
               onChange={handleInputChange}
-              className="w-full bg-[#1A1A1F] text-white px-4 py-3 rounded-lg border border-[#2A2A30] focus:border-[#1dd1a1] transition"
+              className="w-full bg-[#2d3436] text-white px-6 py-4 rounded-2xl border border-white/5 focus:border-[#1dd1a1] transition font-bold"
               required
             />
           </div>

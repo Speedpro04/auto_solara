@@ -213,7 +213,7 @@ function StorePage() {
         ) : (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
             {vehicles.map((vehicle) => (
-              <VehicleCard key={vehicle.id} vehicle={vehicle} />
+              <VehicleCard key={vehicle.id} vehicle={vehicle} store={store} />
             ))}
           </div>
         )}
@@ -222,7 +222,7 @@ function StorePage() {
   )
 }
 
-function VehicleCard({ vehicle }: { vehicle: VehicleWithMedia }) {
+function VehicleCard({ vehicle, store }: { vehicle: VehicleWithMedia, store?: Store | null }) {
   const formatPrice = (price: number) => new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(price);
   const coverImage = vehicle.media?.find((m) => m.order === 0)?.url;
 
@@ -236,6 +236,13 @@ function VehicleCard({ vehicle }: { vehicle: VehicleWithMedia }) {
           <img src={coverImage} alt={`${vehicle.title} ${vehicle.brand} seminovo à venda — Auto Racer`} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-1000" />
         ) : (
           <div className="w-full h-full bg-[#000000] flex items-center justify-center"><Car className="w-20 h-20 text-[#111]" /></div>
+        )}
+        
+        {/* Logo Watermark */}
+        {store?.logo_url && (
+          <div className="absolute bottom-28 right-6 z-20 pointer-events-none opacity-50 transition-opacity group-hover:opacity-100">
+            <img src={store.logo_url} alt="" className="w-16 h-16 object-contain drop-shadow-2xl" />
+          </div>
         )}
         
         {/* Status Badges */}

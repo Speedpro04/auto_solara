@@ -53,7 +53,7 @@ function AdminVehicles() {
     <div className="space-y-8">
       <div className="flex items-center justify-between">
         <div>
-          <h1 className="text-xl font-black font-impact text-white tracking-tight uppercase">Estoque Ativo</h1>
+          <h1 className="text-xl font-black font-impact text-black tracking-tight uppercase">Estoque Ativo</h1>
           <p className="text-[#576574] text-[10px] mt-2 font-black uppercase tracking-[0.4em]">Gestão de Portfólio</p>
         </div>
         <Link
@@ -73,7 +73,7 @@ function AdminVehicles() {
           placeholder="Buscar no inventário..."
           value={searchTerm}
           onChange={(e) => setSearchTerm(e.target.value)}
-          className="w-full bg-[#14181C] text-white pl-14 pr-6 py-4 rounded-[12px] border border-[#262626] focus:border-[#1dd1a1] outline-none transition font-medium"
+          className="w-full bg-[#2d3436] text-white pl-14 pr-6 py-4 rounded-[12px] border border-white/5 focus:border-[#1dd1a1] outline-none transition font-medium"
         />
       </div>
 
@@ -110,7 +110,7 @@ function AdminVehicles() {
           {filteredVehicles.map((vehicle) => (
             <div
               key={vehicle.id}
-              className="bg-[#14181C] rounded-[15px] p-6 border border-[#1dd1a1]/30 hover:border-[#1dd1a1] transition-all duration-300 group shadow-lg"
+              className="bg-[#2d3436] rounded-[15px] p-6 border border-white/5 hover:border-[#1dd1a1] transition-all duration-300 group shadow-lg"
             >
               <div className="flex flex-col md:flex-row items-center justify-between gap-6">
                 <div className="flex items-center gap-6 w-full md:w-auto">
