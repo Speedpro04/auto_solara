@@ -1,4 +1,3 @@
-
 function Footer() {
   return (
     <footer className="pt-24 pb-12 px-6 text-center bg-[#0B0E14] relative z-20 border-t border-white/5">

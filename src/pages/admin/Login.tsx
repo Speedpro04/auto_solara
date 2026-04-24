@@ -1,9 +1,9 @@
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { LogIn, ArrowLeft, X, Send, Store, User, Phone, Mail, CheckCircle2 } from 'lucide-react'
+import { LogIn, ArrowLeft, X, Send, Store, User, Phone, Mail, CheckCircle2, Lock, Eye, EyeOff } from 'lucide-react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { useAuth } from '../../hooks/useAuth'
-import { supabase } from '../../lib/supabase'
+import api from '../../lib/api'
 
 function AdminLogin() {
   const [email, setEmail] = useState('')
@@ -12,12 +12,21 @@ function AdminLogin() {
   const [loading, setLoading] = useState(false)
   const [isRegisterOpen, setIsRegisterOpen] = useState(false)
   const [registerSuccess, setRegisterSuccess] = useState(false)
-  
+  const [showLoginPass, setShowLoginPass] = useState(false)
+  const [showRegPass, setShowRegPass] = useState(false)
+  const [showRegConfirm, setShowRegConfirm] = useState(false)
+  const [isForgotPassOpen, setIsForgotPassOpen] = useState(false)
+  const [forgotSuccess, setForgotSuccess] = useState(false)
+  const [forgotEmail, setForgotEmail] = useState('')
+
+
   const [regData, setRegData] = useState({
     name: '',
     email: '',
     phone: '',
-    storeName: ''
+    storeName: '',
+    password: '',
+    confirmPassword: ''
   })
 
   const { login } = useAuth()
@@ -43,31 +52,61 @@ function AdminLogin() {
     setLoading(true)
     setError('')
 
-    try {
-      const { error: regError } = await supabase
-        .from('store_requests')
-        .insert([{
-          full_name: regData.name,
-          email: regData.email,
-          phone: regData.phone,
-          store_name: regData.storeName,
-          status: 'pending'
-        }])
+    // Validação de senha
+    if (regData.password.length < 8) {
+      setError('A senha deve ter no mínimo 8 caracteres.')
+      setLoading(false)
+      return
+    }
 
-      if (regError) throw regError
+    if (regData.password !== regData.confirmPassword) {
+      setError('As senhas não coincidem.')
+      setLoading(false)
+      return
+    }
+
+    try {
+      await api.post('/api/v1/auth/register', {
+        email: regData.email,
+        password: regData.password,
+        store_name: regData.storeName,
+        phone: regData.phone
+      })
 
       setRegisterSuccess(true)
       setTimeout(() => {
         setIsRegisterOpen(false)
         setRegisterSuccess(false)
-        setRegData({ name: '', email: '', phone: '', storeName: '' })
+        setRegData({ name: '', email: '', phone: '', storeName: '', password: '', confirmPassword: '' })
       }, 3000)
     } catch (err: any) {
-      setError('Erro ao enviar solicitação. Tente novamente.')
+      const detail = err?.response?.data?.detail || 'Erro ao criar conta. Tente novamente.'
+      setError(detail)
     } finally {
       setLoading(false)
     }
   }
+
+  const handleForgotPassword = async (e: React.FormEvent) => {
+    e.preventDefault()
+    setLoading(true)
+    setError('')
+
+    try {
+      await api.post('/api/v1/auth/recover-password', { email: forgotEmail })
+      setForgotSuccess(true)
+      setTimeout(() => {
+        setIsForgotPassOpen(false)
+        setForgotSuccess(false)
+        setForgotEmail('')
+      }, 4000)
+    } catch (err: any) {
+      setError(err?.response?.data?.detail || 'Erro ao enviar email. Verifique se o endereço está correto.')
+    } finally {
+      setLoading(false)
+    }
+  }
+
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-[#050505] px-4 font-sans relative overflow-hidden">
@@ -85,11 +124,11 @@ function AdminLogin() {
         <span className="text-[10px] font-black uppercase tracking-[0.2em] hidden sm:block">Sair do Painel</span>
       </a>
 
-      <div className="relative z-10 w-full max-w-md">
+      <div className="relative z-50 w-full max-w-md">
         <motion.div 
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          className="bg-[#111111]/80 backdrop-blur-3xl rounded-[30px] p-10 border border-white/5 shadow-[0_25px_50px_-12px_rgba(0,0,0,0.5)]"
+          className="relative z-50 bg-[#111111]/80 backdrop-blur-3xl rounded-[30px] p-10 border border-white/5 shadow-[0_25px_50px_-12px_rgba(0,0,0,0.5)]"
         >
           <div className="text-center mb-10">
             <div className="flex justify-center mb-6">
@@ -102,18 +141,19 @@ function AdminLogin() {
                 />
               </div>
             </div>
-            <h1 className="text-xl font-black text-white tracking-tighter mb-2 uppercase font-impact italic">
-              SOLARA <span className="text-[#1dd1a1]">AUTO</span>
+            <h1 className="text-4xl font-bold text-white tracking-[0.2em] font-handwritten uppercase mb-2">
+              AUTO <span className="text-[#1dd1a1]">RACER</span>
             </h1>
             <p className="text-[#737373] text-[10px] font-black uppercase tracking-[0.3em]">Gestão de Estoque Premium</p>
           </div>
 
           <form onSubmit={handleSubmit} className="space-y-6">
-            {error && !isRegisterOpen && (
+            {error && !isRegisterOpen && !isForgotPassOpen && (
               <div className="text-[#ff6b6b] border border-[#ff6b6b]/20 bg-[#ff6b6b]/5 px-4 py-3 rounded-xl text-xs font-bold uppercase tracking-wider text-center">
                 {error}
               </div>
             )}
+
 
             <div className="space-y-2">
               <label className="block text-[10px] font-black uppercase tracking-widest text-[#555] ml-1">
@@ -133,14 +173,23 @@ function AdminLogin() {
               <label className="block text-[10px] font-black uppercase tracking-widest text-[#555] ml-1">
                 Chave de Segurança
               </label>
-              <input
-                type="password"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                className="w-full bg-black/50 text-white px-5 py-4 rounded-xl border border-white/5 focus:border-[#1dd1a1]/50 focus:bg-black outline-none transition-all placeholder:text-[#333] font-medium tracking-widest"
-                placeholder="••••••••"
-                required
-              />
+              <div className="relative">
+                <input
+                  type={showLoginPass ? 'text' : 'password'}
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                  className="w-full bg-black/50 text-white px-5 py-4 pr-12 rounded-xl border border-white/5 focus:border-[#1dd1a1]/50 focus:bg-black outline-none transition-all placeholder:text-[#333] font-medium tracking-widest"
+                  placeholder="••••••••"
+                  required
+                />
+                <button
+                  type="button"
+                  onClick={() => setShowLoginPass(!showLoginPass)}
+                  className="absolute right-4 top-1/2 -translate-y-1/2 text-[#555] hover:text-[#1dd1a1] transition-colors"
+                >
+                  {showLoginPass ? <EyeOff className="w-5 h-5" /> : <Eye className="w-5 h-5" />}
+                </button>
+              </div>
             </div>
 
             <button
@@ -161,12 +210,13 @@ function AdminLogin() {
             <div className="flex items-center justify-between px-2">
               <button 
                 type="button"
-                onClick={() => setError('Por favor, entre em contato com o administrador do sistema para redefinir sua chave de segurança.')}
+                onClick={() => setIsForgotPassOpen(true)}
                 className="text-[9px] font-black uppercase tracking-widest text-[#444] hover:text-[#1dd1a1] transition-colors"
               >
                 Esqueci minha senha
               </button>
               <button 
+
                 type="button"
                 onClick={() => setIsRegisterOpen(true)}
                 className="text-[9px] font-black uppercase tracking-widest text-[#1dd1a1] hover:text-white transition-colors"
@@ -227,8 +277,8 @@ function AdminLogin() {
                       <CheckCircle2 className="w-10 h-10 text-[#1dd1a1]" />
                     </div>
                   </div>
-                  <h2 className="text-3xl font-black font-impact italic text-white uppercase tracking-tighter">Pedido Enviado!</h2>
-                  <p className="text-[#737373] text-sm font-medium">Sua solicitação de parceria foi recebida. Nossa equipe fará a curadoria e entrará em contato em breve.</p>
+                  <h2 className="text-3xl font-black font-impact italic text-white uppercase tracking-tighter">Conta Criada!</h2>
+                  <p className="text-[#737373] text-sm font-medium">Sua loja foi registrada com sucesso. Agora você pode entrar no sistema com seu e-mail e senha.</p>
                 </div>
               ) : (
                 <>
@@ -302,6 +352,55 @@ function AdminLogin() {
                       </div>
                     </div>
 
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                      <div className="space-y-3">
+                        <label className="flex items-center gap-2 text-[10px] font-black uppercase tracking-widest text-[#555] ml-1">
+                          <Lock className="w-3 h-3 text-[#1dd1a1]" /> Senha
+                        </label>
+                        <div className="relative">
+                          <input
+                            required
+                            type={showRegPass ? 'text' : 'password'}
+                            value={regData.password}
+                            onChange={(e) => setRegData({...regData, password: e.target.value})}
+                            className="w-full bg-black/60 text-white px-5 py-4 pr-12 rounded-2xl border border-white/5 focus:border-[#1dd1a1]/50 focus:bg-black outline-none transition-all placeholder:text-[#222] font-semibold text-sm tracking-widest"
+                            placeholder="••••••••"
+                            minLength={8}
+                          />
+                          <button
+                            type="button"
+                            onClick={() => setShowRegPass(!showRegPass)}
+                            className="absolute right-4 top-1/2 -translate-y-1/2 text-[#555] hover:text-[#1dd1a1] transition-colors"
+                          >
+                            {showRegPass ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
+                          </button>
+                        </div>
+                      </div>
+                      <div className="space-y-3">
+                        <label className="flex items-center gap-2 text-[10px] font-black uppercase tracking-widest text-[#555] ml-1">
+                          <Lock className="w-3 h-3 text-[#1dd1a1]" /> Confirmar Senha
+                        </label>
+                        <div className="relative">
+                          <input
+                            required
+                            type={showRegConfirm ? 'text' : 'password'}
+                            value={regData.confirmPassword}
+                            onChange={(e) => setRegData({...regData, confirmPassword: e.target.value})}
+                            className="w-full bg-black/60 text-white px-5 py-4 pr-12 rounded-2xl border border-white/5 focus:border-[#1dd1a1]/50 focus:bg-black outline-none transition-all placeholder:text-[#222] font-semibold text-sm tracking-widest"
+                            placeholder="••••••••"
+                            minLength={8}
+                          />
+                          <button
+                            type="button"
+                            onClick={() => setShowRegConfirm(!showRegConfirm)}
+                            className="absolute right-4 top-1/2 -translate-y-1/2 text-[#555] hover:text-[#1dd1a1] transition-colors"
+                          >
+                            {showRegConfirm ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+
                     <button
                       type="submit"
                       disabled={loading}
@@ -312,7 +411,7 @@ function AdminLogin() {
                       ) : (
                         <>
                           <Send className="w-5 h-5" />
-                          <span>Solicitar Acreditação</span>
+                          <span>Criar Minha Conta</span>
                         </>
                       )}
                     </button>
@@ -323,6 +422,96 @@ function AdminLogin() {
           </div>
         )}
       </AnimatePresence>
+
+      {/* Forgot Password Modal */}
+      <AnimatePresence>
+        {isForgotPassOpen && (
+          <div className="fixed inset-0 z-[100] flex items-center justify-center p-4">
+            <motion.div 
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              onClick={() => setIsForgotPassOpen(false)}
+              className="absolute inset-0 bg-black/90 backdrop-blur-md"
+            />
+            
+            <motion.div 
+              initial={{ opacity: 0, scale: 0.9, y: 20 }}
+              animate={{ opacity: 1, scale: 1, y: 0 }}
+              exit={{ opacity: 0, scale: 0.9, y: 20 }}
+              className="relative w-full max-w-md bg-[#0a0a0a] border border-white/10 rounded-[40px] p-8 md:p-12 shadow-[0_50px_100px_-20px_rgba(0,0,0,0.8)] overflow-hidden"
+              onClick={(e) => e.stopPropagation()}
+            >
+              <div className="absolute top-0 right-0 w-64 h-64 bg-[#1dd1a1]/5 blur-[100px] rounded-full pointer-events-none" />
+              
+              <button 
+                onClick={() => setIsForgotPassOpen(false)}
+                className="absolute top-6 right-6 p-2 text-[#444] hover:text-white transition-colors z-[110]"
+              >
+                <X className="w-6 h-6" />
+              </button>
+
+              {forgotSuccess ? (
+                <div className="text-center py-6 space-y-6">
+                  <div className="flex justify-center">
+                    <div className="w-20 h-20 bg-[#1dd1a1]/20 rounded-full flex items-center justify-center">
+                      <CheckCircle2 className="w-10 h-10 text-[#1dd1a1]" />
+                    </div>
+                  </div>
+                  <h2 className="text-2xl font-black font-impact italic text-white uppercase tracking-tighter">Email Enviado!</h2>
+                  <p className="text-[#737373] text-sm font-medium">Enviamos as instruções de recuperação para o seu email. Verifique sua caixa de entrada e spam.</p>
+                </div>
+              ) : (
+                <>
+                  <div className="mb-8 text-center">
+                    <h2 className="text-2xl font-black font-impact italic text-white uppercase tracking-tighter mb-2">Recuperar Senha</h2>
+                    <p className="text-[10px] font-black uppercase tracking-[0.2em] text-[#555]">Informe seu email de acesso</p>
+                  </div>
+
+                  <form onSubmit={handleForgotPassword} className="space-y-6 relative z-[105]">
+                    {error && isForgotPassOpen && (
+                      <div className="text-[#ff6b6b] border border-[#ff6b6b]/20 bg-[#ff6b6b]/5 px-4 py-3 rounded-xl text-xs font-bold uppercase tracking-wider text-center">
+                        {error}
+                      </div>
+                    )}
+
+                    <div className="space-y-3">
+                      <label className="flex items-center gap-2 text-[10px] font-black uppercase tracking-widest text-[#555] ml-1">
+                        <Mail className="w-3 h-3 text-[#1dd1a1]" /> E-mail
+                      </label>
+                      <input
+                        required
+                        type="email"
+                        value={forgotEmail}
+                        onChange={(e) => setForgotEmail(e.target.value)}
+                        className="w-full bg-black/60 text-white px-5 py-4 rounded-2xl border border-white/5 focus:border-[#1dd1a1]/50 focus:bg-black outline-none transition-all placeholder:text-[#222] font-semibold text-sm"
+                        placeholder="seu@acesso.com"
+                      />
+                    </div>
+
+                    <button
+                      type="submit"
+                      disabled={loading}
+                      className="w-full flex items-center justify-center gap-4 bg-[#1dd1a1] text-black px-6 py-5 rounded-2xl hover:bg-white hover:scale-[1.02] active:scale-[0.98] transition-all duration-300 font-black uppercase text-xs tracking-[0.2em] shadow-[0_20px_40px_rgba(29,209,161,0.3)] disabled:opacity-50 mt-4"
+                    >
+                      {loading ? (
+                        <div className="w-6 h-6 border-2 border-black/30 border-t-black rounded-full animate-spin" />
+                      ) : (
+                        <>
+                          <Send className="w-5 h-5" />
+                          <span>Enviar Link</span>
+                        </>
+                      )}
+                    </button>
+                  </form>
+                </>
+              )}
+            </motion.div>
+          </div>
+        )}
+      </AnimatePresence>
+
+
     </div>
   )
 }

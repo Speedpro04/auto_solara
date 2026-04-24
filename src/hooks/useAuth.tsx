@@ -37,16 +37,23 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     const storedStore = localStorage.getItem('store')
 
     if (token && storedUser) {
-      setUser(JSON.parse(storedUser))
-      if (storedStore) setStore(JSON.parse(storedStore))
+      try {
+        if (storedUser !== 'undefined') setUser(JSON.parse(storedUser))
+        if (storedStore && storedStore !== 'undefined') setStore(JSON.parse(storedStore))
+      } catch (err) {
+        console.error('Failed to parse auth data from localStorage', err)
+        localStorage.removeItem('auth_token')
+        localStorage.removeItem('user')
+        localStorage.removeItem('store')
+      }
     }
 
     setLoading(false)
   }, [])
 
   const login = async (email: string, password: string) => {
-    // Autentica via a nova API FastAPI (que faz o proxy pro Supabase Auth)
-    const { data } = await api.post('/api/auth/login', { email, password })
+    // Autentica via a API FastAPI
+    const { data } = await api.post('/api/v1/auth/login', { email, password })
 
     if (!data.success) {
       throw new Error('Credenciais inválidas')

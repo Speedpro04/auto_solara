@@ -1,7 +1,7 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from middleware import tenant_middleware
-from routes import public_routes, admin_routes
+from routes import public_routes, admin_routes, auth_routes
 from config import get_settings
 
 settings = get_settings()
@@ -30,6 +30,7 @@ app.middleware("http")(tenant_middleware)
 # Routes
 app.include_router(public_routes.router, prefix="/api/v1", tags=["public"])
 app.include_router(admin_routes.router, prefix="/api/v1/admin", tags=["admin"])
+app.include_router(auth_routes.router, prefix="/api/v1/auth", tags=["auth"])
 
 
 @app.get("/health")

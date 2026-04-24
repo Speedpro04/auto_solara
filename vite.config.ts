@@ -9,15 +9,17 @@ export default defineConfig({
   ],
   base: '/',
   server: {
-    port: 3000,
+    port: 3005,
     host: true
   },
   preview: {
     allowedHosts: ['auto.axoshub.com', 'localhost'],
-    port: 3000,
+    port: 3005,
     host: true
   },
-  ssr: {
-    noExternal: ['framer-motion']
+  resolve: {
+    alias: {
+      'framer-motion': '/src/lib/mock-framer-motion.ts'
+    }
   }
 })

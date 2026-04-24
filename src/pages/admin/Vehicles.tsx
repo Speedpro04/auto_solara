@@ -17,7 +17,7 @@ function AdminVehicles() {
 
   const fetchVehicles = async () => {
     try {
-      const { data } = await api.get(`/api/stores/${store?.id}/vehicles`)
+      const { data } = await api.get('/admin/vehicles')
       setVehicles(data)
     } catch (error) {
       console.error('Erro ao carregar veículos:', error)
@@ -30,7 +30,7 @@ function AdminVehicles() {
     if (!confirm('Tem certeza que deseja excluir este veículo de elite?')) return
 
     try {
-      await api.delete(`/api/vehicles/${id}`)
+      await api.delete(`/admin/vehicles/${id}`)
       fetchVehicles()
     } catch (error) {
       console.error('Erro ao excluir veículo:', error)

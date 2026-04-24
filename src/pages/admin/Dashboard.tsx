@@ -16,8 +16,8 @@ function AdminDashboard() {
       
       try {
         const [statsRes, vehiclesRes] = await Promise.all([
-          api.get(`/api/stores/${store.id}/dashboard`),
-          api.get(`/api/stores/${store.id}/vehicles`),
+          api.get('/admin/dashboard'),
+          api.get('/admin/vehicles'),
         ])
         setStats(statsRes.data)
         setRecentVehicles(vehiclesRes.data.slice(0, 5))

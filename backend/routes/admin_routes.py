@@ -205,6 +205,36 @@ async def delete_vehicle(request: Request, vehicle_id: str):
     return {"message": "Veículo removido com sucesso"}
 
 
+@router.post("/upload")
+async def upload_file(request: Request, file: UploadFile = File(...)):
+    """Upload de arquivo para o Supabase Storage"""
+    store_id = request.state.store_id
+    
+    # Ler conteúdo do arquivo
+    file_content = await file.read()
+    file_ext = os.path.splitext(file.filename)[1]
+    
+    # Gerar path único: stores/{store_id}/{uuid}{ext}
+    import uuid
+    file_path = f"{store_id}/{uuid.uuid4()}{file_ext}"
+    
+    # Upload para o Supabase Storage (bucket: solara_media)
+    try:
+        # Nota: O cliente supabase-py as vezes precisa do storage_client diretamente
+        response = supabase.storage.from_("solara_media").upload(
+            path=file_path,
+            file=file_content,
+            file_options={"content-type": file.content_type}
+        )
+        
+        # Obter URL pública
+        url_response = supabase.storage.from_("solara_media").get_public_url(file_path)
+        
+        return {"url": url_response, "path": file_path}
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"Erro no upload: {str(e)}")
+
+
 # ============================================
 # Media Management
 # ============================================

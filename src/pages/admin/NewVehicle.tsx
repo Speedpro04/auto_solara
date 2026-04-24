@@ -60,7 +60,7 @@ function AdminNewVehicle() {
     setLoading(true)
     try {
       // 1. Cria o veículo vinculado a loja atual
-      const { data: { vehicle } } = await api.post('/api/vehicles', {
+      const { data: vehicle } = await api.post('/admin/vehicles', {
         ...formData,
         store_id: store?.id,
         year: parseInt(formData.year) || 2024,
@@ -74,15 +74,16 @@ function AdminNewVehicle() {
         uploadData.append('file', img.file)
 
         // Upload no backend (vai pro bucket solara_media e retorna a URL)
-        const { data: { url } } = await api.post('/api/upload/', uploadData, {
+        const { data } = await api.post('/admin/upload', uploadData, {
           headers: { 'Content-Type': 'multipart/form-data' }
         })
+        const url = data.url
 
         // 3. Vincula a URL pública ao veículo recém criado
-        return api.post(`/api/vehicles/media`, {
-          vehicle_id: vehicle.id,
+        return api.post(`/admin/vehicles/${vehicle.id}/media`, {
           url: url,
-          type: 'image'
+          type: 'image',
+          size_bytes: img.file.size
         })
       })
 

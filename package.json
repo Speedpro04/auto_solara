@@ -13,18 +13,22 @@
     "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0"
   },
   "dependencies": {
+    "@babel/traverse": "^7.29.0",
     "@supabase/supabase-js": "^2.39.3",
     "@types/d3": "^7.4.3",
-    "axios": "^1.6.5",
+    "axios": "^1.15.2",
     "d3": "^7.9.0",
-    "framer-motion": "^11.18.2",
+    "lightningcss": "^1.32.0",
     "lucide-react": "0.309.0",
+    "object-assign": "^4.1.1",
+    "prop-types": "^15.8.1",
     "react": "18.3.1",
     "react-dom": "18.3.1",
     "react-dropzone": "^15.0.0",
     "react-router-dom": "^6.21.1"
   },
   "devDependencies": {
+    "@babel/core": "^7.29.0",
     "@tailwindcss/postcss": "^4.2.2",
     "@tailwindcss/vite": "^4.2.2",
     "@types/react": "18.2.43",
@@ -40,5 +44,9 @@
     "tailwindcss": "^4.2.2",
     "typescript": "^5.2.2",
     "vite": "^5.0.8"
+  },
+  "optionalDependencies": {
+    "@rollup/rollup-win32-x64-msvc": "^4.60.2",
+    "@tailwindcss/oxide-win32-x64-msvc": "^4.2.4"
   }
 }

@@ -22,7 +22,7 @@ function AdminStoreProfile() {
   useEffect(() => {
     const fetchStore = async () => {
       try {
-        const { data } = await api.get('/store')
+        const { data } = await api.get('/admin/store')
         setFormData({
           name: data.name,
           phone: data.phone,
@@ -70,13 +70,13 @@ function AdminStoreProfile() {
         const fileName = `${user.store_id}/logo.${fileExt}`
 
         const { error: uploadError } = await supabase.storage
-          .from('vehicles')
+          .from('solara_media')
           .upload(fileName, logoFile, { upsert: true })
 
         if (uploadError) throw uploadError
 
         const { data: urlData } = supabase.storage
-          .from('vehicles')
+          .from('solara_media')
           .getPublicUrl(fileName)
 
         logoUrl = urlData.publicUrl

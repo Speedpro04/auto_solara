@@ -36,39 +36,8 @@ function Home() {
       <img src="/logo-auto-destaque.png" className="absolute top-[calc(45%-95px)] left-1/2 -translate-x-1/2 ml-[370px] w-[220px] md:w-[570px] opacity-[0.1] pointer-events-none select-none object-contain z-0" alt="" />
       <img src="/logo-auto-destaque.png" className="absolute top-[calc(82%+120px)] left-1/2 -translate-x-1/2 ml-[450px] w-[260px] md:w-[660px] opacity-[0.1] pointer-events-none select-none object-contain z-0" alt="" />
       
-      {/* Frota SUV Decorativa - Centralizada (Subida +30px) */}
-      <motion.img 
-        initial={{ opacity: 0, y: 50 }} animate={{ opacity: 0.1, y: 0 }} transition={{ duration: 2, ease: "easeOut" }}
-        src="/suv.png" 
-        className="absolute top-[50px] left-1/2 -translate-x-1/2 w-[350px] md:w-[950px] pointer-events-none select-none object-contain z-0 drop-shadow-[0_0_80px_rgba(29,209,161,0.15)]" 
-        alt="" 
-      />
-      <motion.img 
-        initial={{ opacity: 0, x: 200 }} animate={{ opacity: 0.1, x: 0 }} transition={{ duration: 2, delay: 0.5, ease: "easeOut" }}
-        src="/suv.png" 
-        className="absolute top-[5790px] left-1/2 -translate-x-1/2 -ml-[500px] w-[250px] md:w-[700px] pointer-events-none select-none object-contain z-0 drop-shadow-[0_0_80px_rgba(255,255,255,0.05)]" 
-        alt="" 
-      />
-      
-      
-      {/* Moto Real da Loja - Local 01: Superior Direita (Atrás do Hero) */}
-      <motion.img 
-        initial={{ opacity: 0, x: 200 }} whileInView={{ opacity: 0.1, x: 0 }} viewport={{ once: true }} transition={{ duration: 2.5, ease: "easeOut" }}
-        src="/moto_lo_ja.png" 
-        className="absolute top-[1450px] -right-[110px] w-[350px] md:w-[900px] pointer-events-none select-none object-contain z-0 drop-shadow-[0_0_100px_rgba(29,209,161,0.15)] rotate-[-12deg] scale-110" 
-        alt="" 
-      />
-
-      {/* Moto Real da Loja - Local 02: Meio Esquerda (Entre os carros da vitrine) */}
-      <motion.img 
-        initial={{ opacity: 0, x: -250 }} whileInView={{ opacity: 0.1, x: 0 }} viewport={{ once: true }} transition={{ duration: 3, delay: 0.5, ease: "easeOut" }}
-        src="/moto_loja.png" 
-        className="absolute top-[3710px] left-1/2 -translate-x-1/2 -ml-[180px] w-[270px] md:w-[820px] pointer-events-none select-none object-contain z-0 -scale-x-100 rotate-[10deg] drop-shadow-[0_0_80px_rgba(255,255,255,0.03)]" 
-        alt="" 
-      />
-      
       {/* Modern Slim Search Section Just Below Menu */}
-      <section className="relative pt-[190px] px-6 z-30 mb-8 max-w-[1080px] mx-auto">
+      <section className="relative pt-[135px] px-6 z-30 mb-8 max-w-[550px] mx-auto">
         <div className="w-full flex flex-col md:flex-row items-center gap-2 p-1.5 rounded-full bg-[#0A0D10]/80 border border-white/10 backdrop-blur-md shadow-lg">
            <div className="flex-1 w-full relative group">
              <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-[#555] group-focus-within:text-[#1dd1a1] transition-colors" />
@@ -79,19 +48,28 @@ function Home() {
                style={{ boxShadow: 'none' }}
              />
            </div>
-<button className="w-full md:w-auto px-6 py-2.5 bg-[#1dd1a1] text-black font-black uppercase tracking-widest text-[10px] rounded-full hover:bg-[#00f3ff] hover:text-[#555] transition-all">
+           <button className="w-full md:w-auto px-6 py-2.5 bg-[#1dd1a1] text-black font-black uppercase tracking-widest text-[10px] rounded-full hover:bg-[#00f3ff] hover:text-[#555] transition-all">
               Buscar
             </button>
         </div>
       </section>
 
-      {/* H1 SEO - Keyword Principal */}
-      <h1 className="max-w-[1080px] mx-auto px-6 mb-[80px] text-center text-lg md:text-xl lg:text-2xl font-bold text-[#8395a7]">
-        Mais que veículos, entregamos tranquilidade. Encontre o seminovo ou importado perfeito na <span className="text-[#1dd1a1]">Auto Racer</span>
+      {/* Frota SUV Decorativa - Agora no fluxo do documento */}
+      <div className="w-full flex justify-center mt-8 relative z-10">
+        <img 
+          src="/suv.png" 
+          className="w-[350px] md:w-[950px] pointer-events-none select-none object-contain drop-shadow-[0_0_80px_rgba(29,209,161,0.15)]" 
+          alt="" 
+        />
+      </div>
+
+      {/* H1 SEO - Keyword Principal - 35px abaixo da imagem */}
+      <h1 className="max-w-[900px] mx-auto px-6 mt-[35px] mb-0 text-center text-lg md:text-xl lg:text-2xl font-bold text-white relative z-20">
+        Mais que veículos, entregamos tranquilidade. Encontre o seminovo ou importado perfeito na <span className="text-[#1dd1a1] font-['Architects_Daughter'] text-3xl">Auto Racer</span>
       </h1>
 
       {/* Dynamic Hero Section with Luxury Flare */}
-      <section className="relative pt-24 md:pt-32 pb-32 px-4 overflow-hidden">
+      <section className="relative pt-12 md:pt-20 pb-32 px-4 overflow-hidden">
         {/* Animated Background Elements */}
         <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[1140px] h-[800px] bg-[#1dd1a1]/5 blur-[120px] rounded-full" />
         <div className="absolute -top-48 -right-48 w-96 h-96 bg-[#1dd1a1]/10 blur-[100px] rounded-full" />

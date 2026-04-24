@@ -10,8 +10,9 @@ async def tenant_middleware(request: Request, call_next):
     if request.url.path in ["/health", "/docs", "/redoc", "/openapi.json"]:
         return await call_next(request)
 
-    # Extrair subdomínio do header Host
-    host = request.headers.get("host", "")
+    # Extrair subdomínio do header Host (removendo a porta se existir)
+    host_raw = request.headers.get("host", "")
+    host = host_raw.split(":")[0]
     x_store_slug = request.headers.get("X-Store-Slug")
 
     store_id = None
@@ -24,11 +25,11 @@ async def tenant_middleware(request: Request, call_next):
             store = response.data[0]
             store_id = store["id"]
     else:
-        # Extrair do host (ex: loja.solaraauto.com.br -> loja)
+        # Extrair do host (ex: loja.solaraauto.com.br -> loja ou loja.localhost -> loja)
         parts = host.split(".")
         if len(parts) >= 2:
             subdomain = parts[0]
-            if subdomain not in ["www", "localhost", "127.0.0.1"]:
+            if subdomain not in ["www", "localhost", "127", "0"]:
                 response = supabase.table("stores").select("id, slug, active").eq("slug", subdomain).execute()
                 if response.data:
                     store = response.data[0]

@@ -26,9 +26,9 @@ function AdminSidebar() {
              />
           </div>
           <div>
-            <h1 className="text-xl font-black text-white tracking-widest uppercase font-impact italic">
-              SOLARA <span className="text-[#1dd1a1]">AUTO</span>
-            </h1>
+            <span className="text-xl md:text-2xl font-black text-white tracking-[0.2em] font-['Architects_Daughter'] uppercase">
+              AUTO <span className="text-[#1dd1a1]">RACER</span>
+            </span>
             <p className="text-[8px] uppercase tracking-[0.5em] text-[#444] font-black mt-1">Intelligence System</p>
           </div>
         </Link>
