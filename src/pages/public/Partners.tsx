@@ -115,7 +115,7 @@ function Partners() {
             </div>
 
             <a 
-              href="https://wa.me/5511999999999?text=Olá! Tenho interesse em desenvolver um App Exclusivo (White Label) para minha concessionária com a Auto Racer."
+              href="https://wa.me/5512978138934?text=Olá! Tenho interesse em desenvolver um App Exclusivo (White Label) para minha concessionária com a Auto Racer."
               target="_blank"
               rel="noopener noreferrer"
               className="relative z-10 w-full flex items-center justify-center gap-3 bg-transparent border-2 border-[#1dd1a1] text-[#1dd1a1] px-6 py-5 rounded-2xl hover:bg-[#1dd1a1] hover:text-black hover:scale-[1.02] active:scale-[0.98] transition-all duration-300 font-black uppercase text-xs tracking-[0.2em]"

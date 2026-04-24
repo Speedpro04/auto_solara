@@ -355,7 +355,7 @@ function Home() {
             </p>
             
             <a 
-              href="https://wa.me/5511999999999?text=Olá! Gostaria de uma consultoria premium da Auto Racer."
+              href="https://wa.me/5512978138934?text=Olá! Gostaria de uma consultoria premium da Auto Racer."
               target="_blank"
               rel="noopener noreferrer"
               className="flex items-center gap-4 px-12 py-[18px] bg-[#1dd1a1] text-black font-black uppercase tracking-widest text-sm rounded-[30px] hover:bg-[#00f3ff] hover:text-[#555] hover:-translate-y-2 hover:shadow-[0_20px_40px_rgba(29,209,161,0.3)] transition-all duration-300 active:scale-95 group/btn"
