@@ -54,7 +54,8 @@ async def list_vehicles(
     if max_price is not None:
         query = query.lte("price", max_price)
 
-    query = query.order("created_at", desc=True).limit(limit)
+    # range() aplica offset + limit de fato (antes o offset era ignorado).
+    query = query.order("created_at", desc=True).range(offset, offset + limit - 1)
 
     response = query.execute()
 
@@ -98,6 +99,13 @@ async def get_vehicle_detail(request: Request, slug_or_id: str):
 
     vehicle["media"] = media_response.data
 
+    # Buscar dados da loja (necessário para o botão de WhatsApp do comprador).
+    # Sem isso o frontend caía num telefone placeholder.
+    store_response = supabase.table("stores").select(
+        "id, slug, name, phone, city"
+    ).eq("id", vehicle["store_id"]).execute()
+    vehicle["store"] = store_response.data[0] if store_response.data else None
+
     # Registrar view (opcional)
     try:
         supabase.rpc("record_vehicle_view", {
@@ -108,6 +116,31 @@ async def get_vehicle_detail(request: Request, slug_or_id: str):
         pass  # Ignorar erro de analytics
 
     return vehicle
+
+
+@router.post("/vehicles/{vehicle_id}/contact", status_code=201)
+async def register_contact(vehicle_id: str, request: Request):
+    """Registra um lead (clique no WhatsApp) em vehicle_contacts.
+    Chamado pela vitrine pública quando o comprador aciona o vendedor."""
+    # O store_id confiável vem do próprio veículo, não do cliente.
+    vehicle = supabase.table("vehicles").select("store_id").eq("id", vehicle_id).execute()
+    if not vehicle.data:
+        raise HTTPException(status_code=404, detail="Veículo não encontrado")
+
+    store_id = vehicle.data[0]["store_id"]
+    client_ip = request.client.host if request.client else None
+
+    try:
+        supabase.table("vehicle_contacts").insert({
+            "vehicle_id": vehicle_id,
+            "store_id": store_id,
+            "ip_address": client_ip,
+        }).execute()
+    except Exception:
+        # Não queremos quebrar a UX do comprador se o analytics falhar.
+        return {"status": "skipped"}
+
+    return {"status": "ok"}
 
 
 @router.get("/stores")

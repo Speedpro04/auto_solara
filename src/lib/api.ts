@@ -22,4 +22,26 @@ api.interceptors.request.use((config) => {
   return config
 })
 
+// Sessão expirada (401) numa rota autenticada: limpa o estado e manda pro login,
+// em vez de o painel quebrar em silêncio. Não dispara no próprio /auth/login
+// (onde 401 = credencial inválida, tratado na tela de login).
+api.interceptors.response.use(
+  (response) => response,
+  (error) => {
+    const status = error?.response?.status
+    const url: string = error?.config?.url || ''
+    const hadToken = !!localStorage.getItem('auth_token')
+    if (status === 401 && hadToken && !url.includes('/auth/login')) {
+      localStorage.removeItem('auth_token')
+      localStorage.removeItem('refresh_token')
+      localStorage.removeItem('user')
+      localStorage.removeItem('store')
+      if (!window.location.pathname.startsWith('/login')) {
+        window.location.href = '/login'
+      }
+    }
+    return Promise.reject(error)
+  }
+)
+
 export default api

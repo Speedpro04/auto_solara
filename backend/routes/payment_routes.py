@@ -1,11 +1,12 @@
 import os
 import uuid
 import stripe
-from fastapi import APIRouter, HTTPException, Request
+from fastapi import APIRouter, HTTPException, Request, Depends
 from pydantic import BaseModel
 from dotenv import load_dotenv
 from supabase import create_client
 from crypto import encrypt_secret, decrypt_secret
+from auth import get_current_store
 
 load_dotenv()
 
@@ -49,8 +50,8 @@ async def create_checkout(data: CheckoutRequest, request: Request):
             "reference_id": reference_id,
             "status": "PENDING"
         }).execute()
-    except Exception as e:
-        raise HTTPException(status_code=400, detail=f"Erro ao salvar registro: {str(e)}")
+    except Exception:
+        raise HTTPException(status_code=400, detail="Erro ao salvar o registro. Tente novamente.")
 
     try:
         origin = request.headers.get("origin", "http://localhost:3007")
@@ -93,8 +94,42 @@ async def create_checkout(data: CheckoutRequest, request: Request):
             "reference_id": reference_id
         }
 
-    except stripe.StripeError as e:
-        raise HTTPException(status_code=502, detail=f"Erro ao criar checkout no Stripe: {str(e)}")
+    except stripe.StripeError:
+        raise HTTPException(status_code=502, detail="Erro ao iniciar o pagamento. Tente novamente.")
+
+
+@router.post("/subscribe")
+async def create_subscription(request: Request, store=Depends(get_current_store)):
+    """
+    Cria um checkout de ASSINATURA no Stripe para uma loja JÁ existente (logada).
+    Usado quando o trial expira e o lojista quer assinar — NÃO recria a conta/loja
+    (resolve o 422 do fluxo antigo, que exigia senha e tentava registrar de novo).
+    """
+    store_id = store["store_id"]
+    origin = request.headers.get("origin", "http://localhost:3007")
+
+    try:
+        session = stripe.checkout.Session.create(
+            payment_method_types=['card'],
+            line_items=[{
+                'price_data': {
+                    'currency': 'brl',
+                    'product_data': {'name': 'Auto Racer — Plano Parceiro'},
+                    'unit_amount': 8900,
+                    'recurring': {'interval': 'month'},
+                },
+                'quantity': 1,
+            }],
+            mode='subscription',
+            subscription_data={'metadata': {'store_id': store_id}},
+            success_url=f"{origin}/admin?assinatura=sucesso",
+            cancel_url=f"{origin}/admin",
+            client_reference_id=f"STORE-{store_id}",
+            customer_email=store.get("email"),
+        )
+        return {"payment_url": session.url, "checkout_id": session.id}
+    except stripe.StripeError:
+        raise HTTPException(status_code=502, detail="Erro ao iniciar a assinatura. Tente novamente.")
 
 
 @router.post("/webhook")
@@ -122,9 +157,36 @@ async def stripe_webhook(request: Request):
     # ─── CHECKOUT COMPLETO (trial iniciado) ───
     if event_type == 'checkout.session.completed':
         session = event['data']['object']
-        reference_id = session.get('client_reference_id')
+        reference_id = session.get('client_reference_id') or ''
         subscription_id = session.get('subscription', '')
         customer_id = session.get('customer', '')
+
+        # ── Assinatura de loja JÁ existente (conversão pós-trial) ──
+        # Não recria conta/loja: só ativa a assinatura e estende a expiração.
+        if reference_id.startswith("STORE-"):
+            from datetime import datetime, timedelta, timezone
+            store_id = reference_id[len("STORE-"):]
+            now = datetime.now(timezone.utc)
+            period_end = now + timedelta(days=30)
+
+            supabase.table("subscriptions").insert({
+                "store_id": store_id,
+                "plan": "parceiro",
+                "status": "ACTIVE",
+                "amount": 8900,
+                "pagbank_order_id": subscription_id,
+                "pagbank_charge_id": customer_id,
+                "current_period_start": now.isoformat(),
+                "current_period_end": period_end.isoformat(),
+            }).execute()
+
+            supabase.table("stores").update({
+                "plan": "parceiro",
+                "active": True,
+                "subscription_expires_at": period_end.isoformat(),
+            }).eq("id", store_id).execute()
+
+            return {"status": "success"}
 
         # Log da transação
         supabase.table("payment_transactions").insert({
@@ -149,14 +211,30 @@ async def stripe_webhook(request: Request):
 
         reg = pending.data[0]
 
-        # Criar usuário no Supabase Auth
-        auth_response = supabase.auth.admin.create_user({
-            "email": reg["email"],
-            "password": decrypt_secret(reg["password_hash"]),
-            "email_confirm": True
-        })
-
-        user_id = auth_response.user.id
+        # Criar usuário no Supabase Auth.
+        # Idempotência: se o Stripe reenviar o webhook após uma falha parcial
+        # (usuário já criado, mas loja falhou), o create_user lança porque o e-mail
+        # já existe. Nesse caso, recuperamos o id do usuário existente e seguimos.
+        try:
+            auth_response = supabase.auth.admin.create_user({
+                "email": reg["email"],
+                "password": decrypt_secret(reg["password_hash"]),
+                "email_confirm": True
+            })
+            user_id = auth_response.user.id
+        except Exception:
+            user_id = None
+            try:
+                existing_users = supabase.auth.admin.list_users()
+                for u in (existing_users or []):
+                    u_email = getattr(u, "email", None) or (u.get("email") if isinstance(u, dict) else None)
+                    if u_email and u_email.lower() == reg["email"].lower():
+                        user_id = getattr(u, "id", None) or (u.get("id") if isinstance(u, dict) else None)
+                        break
+            except Exception:
+                user_id = None
+            if not user_id:
+                raise HTTPException(status_code=500, detail="Falha ao processar a conta. Tente novamente.")
 
         # Criar loja com trial de 15 dias
         import re

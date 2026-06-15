@@ -27,26 +27,18 @@ function Checkout() {
   const handlePayment = async () => {
     setLoading(true)
     setError('')
-    
-    // Recuperar dados temporários do registro (podem estar no localStorage)
-    const regDataRaw = localStorage.getItem('pending_reg_data')
-    if (!regDataRaw) {
-      setError('Dados de cadastro não encontrados. Por favor, preencha o formulário novamente.')
+
+    // Fluxo de assinatura para loja JÁ logada (conversão pós-trial).
+    // Usa o token de sessão — não precisa reenviar senha/dados de cadastro.
+    if (!localStorage.getItem('auth_token')) {
+      setError('Você precisa estar logado para assinar. Redirecionando para o login...')
+      setTimeout(() => navigate('/login'), 2500)
       setLoading(false)
-      setTimeout(() => navigate('/parceiro'), 3000)
       return
     }
 
-    const regData = JSON.parse(regDataRaw)
-
     try {
-      const response = await api.post('/payments/create-checkout', {
-        email: regData.email,
-        password: regData.password,
-        store_name: regData.storeName,
-        phone: regData.phone,
-        owner_name: regData.name
-      })
+      const response = await api.post('/payments/subscribe')
 
       if (response.data.payment_url) {
         window.location.href = response.data.payment_url
@@ -54,7 +46,12 @@ function Checkout() {
         throw new Error('Não foi possível gerar o link de pagamento.')
       }
     } catch (err: any) {
-      setError(err?.response?.data?.detail || 'Erro ao processar checkout. Verifique se o backend está online.')
+      if (err?.response?.status === 401) {
+        setError('Sessão expirada. Faça login novamente para assinar.')
+        setTimeout(() => navigate('/login'), 2500)
+      } else {
+        setError(err?.response?.data?.detail || 'Erro ao processar a assinatura. Tente novamente.')
+      }
     } finally {
       setLoading(false)
     }
@@ -159,11 +156,15 @@ function Checkout() {
                   <Loader2 className="w-6 h-6 animate-spin" />
                 ) : (
                   <>
-                    <p className="text-xs text-[#576574] mt-2">Seu cartão de crédito será lido de forma segura apenas após o término dos 15 dias de teste gratuito. Não haverá cobrança durante o período de teste.</p><span>Começar 15 Dias Grátis</span>
+                    <span>Começar 15 Dias Grátis</span>
                     <ArrowRight className="w-5 h-5" />
                   </>
                 )}
               </button>
+
+              <p className="mt-4 text-xs text-[#576574] leading-relaxed">
+                Seu cartão será cobrado de forma segura apenas após o término dos 15 dias de teste gratuito. Não haverá cobrança durante o período de teste.
+              </p>
               
               <p className="mt-6 text-[9px] text-[#444] font-black uppercase tracking-[0.3em]">
                 Sem fidelidade. Cancele a qualquer momento, mesmo durante o trial.

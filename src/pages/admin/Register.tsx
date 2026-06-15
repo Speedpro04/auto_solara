@@ -89,7 +89,7 @@ function AdminRegister() {
           {/* Badge de acesso gratuito temporário */}
           <div className="mb-8 flex items-center justify-center gap-3 bg-[#1dd1a1]/10 border border-[#1dd1a1]/20 rounded-[4px] px-5 py-3">
             <CheckCircle2 className="w-5 h-5 text-[#1dd1a1]" />
-            <span className="text-sm font-black text-[#1dd1a1] uppercase tracking-widest">10 Dias Grátis — Sem Cartão</span>
+            <span className="text-sm font-black text-[#1dd1a1] uppercase tracking-widest">15 Dias Grátis — Sem Cartão</span>
           </div>
 
           <form onSubmit={handleRegister} className="space-y-8 relative z-10">

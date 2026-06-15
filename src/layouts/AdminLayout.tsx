@@ -1,15 +1,42 @@
-import { Outlet, Navigate, useNavigate } from 'react-router-dom'
+import { Outlet, Navigate, useNavigate, useLocation } from 'react-router-dom'
 import { useState, useEffect, useMemo } from 'react'
 import AdminSidebar from '../components/admin/AdminSidebar'
 import AdminHeader from '../components/admin/AdminHeader'
 import { useAuth } from '../hooks/useAuth'
+import api from '../lib/api'
 import { AlertCircle, Clock, CreditCard, X } from 'lucide-react'
 
 function AdminLayout() {
-  const { user, store, loading } = useAuth()
+  const { user, store, loading, refreshStore } = useAuth()
   const navigate = useNavigate()
+  const location = useLocation()
   const [dismissedBanner, setDismissedBanner] = useState(false)
   const [sidebarOpen, setSidebarOpen] = useState(false)
+  const [subscribing, setSubscribing] = useState(false)
+
+  // Ao voltar do Stripe (sucesso na assinatura), recarrega a loja para refletir
+  // o novo plano e liberar o painel sem precisar relogar.
+  useEffect(() => {
+    if (new URLSearchParams(location.search).get('assinatura') === 'sucesso') {
+      refreshStore().finally(() => navigate('/admin', { replace: true }))
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [location.search])
+
+  // Cria o checkout de assinatura para a loja JÁ logada e redireciona ao Stripe.
+  const handleSubscribe = async () => {
+    setSubscribing(true)
+    try {
+      const { data } = await api.post('/payments/subscribe')
+      if (data.payment_url) {
+        window.location.href = data.payment_url
+      } else {
+        setSubscribing(false)
+      }
+    } catch {
+      setSubscribing(false)
+    }
+  }
 
   const trialInfo = useMemo(() => {
     if (!store?.trial_ends_at) return null
@@ -58,20 +85,12 @@ function AdminLayout() {
           </div>
 
           <button
-            onClick={() => {
-              // Salvar dados para o checkout
-              localStorage.setItem('pending_reg_data', JSON.stringify({
-                email: user.email,
-                storeName: store?.name || '',
-                phone: store?.phone || '',
-                name: ''
-              }))
-              navigate('/checkout')
-            }}
-            className="w-full flex items-center justify-center gap-3 bg-[#1dd1a1] text-black px-6 py-5 rounded-[4px] hover:bg-white hover:text-gray-800 hover:scale-[1.02] active:scale-[0.98] transition-all duration-300 font-black uppercase text-xs tracking-[0.2em] shadow-[0_20px_40px_rgba(29,209,161,0.3)]"
+            onClick={handleSubscribe}
+            disabled={subscribing}
+            className="w-full flex items-center justify-center gap-3 bg-[#1dd1a1] text-black px-6 py-5 rounded-[4px] hover:bg-white hover:text-gray-800 hover:scale-[1.02] active:scale-[0.98] transition-all duration-300 font-black uppercase text-xs tracking-[0.2em] shadow-[0_20px_40px_rgba(29,209,161,0.3)] disabled:opacity-50"
           >
             <CreditCard className="w-5 h-5" />
-            <span>Assinar Agora — R$ 89,00/mês</span>
+            <span>{subscribing ? 'Redirecionando...' : 'Assinar Agora — R$ 89,00/mês'}</span>
           </button>
 
           <p className="text-[9px] text-[#444] font-black uppercase tracking-[0.3em]">
@@ -99,18 +118,11 @@ function AdminLayout() {
                   : `Restam ${trialInfo.daysLeft} dias de teste gratuito.`}
                 {' '}
                 <button
-                  onClick={() => {
-                    localStorage.setItem('pending_reg_data', JSON.stringify({
-                      email: user.email,
-                      storeName: store?.name || '',
-                      phone: store?.phone || '',
-                      name: ''
-                    }))
-                    navigate('/checkout')
-                  }}
-                  className="underline text-[#1dd1a1] hover:text-white transition-colors"
+                  onClick={handleSubscribe}
+                  disabled={subscribing}
+                  className="underline text-[#1dd1a1] hover:text-white transition-colors disabled:opacity-50"
                 >
-                  Assinar agora
+                  {subscribing ? 'Redirecionando...' : 'Assinar agora'}
                 </button>
                 <p className="text-xs text-[#8395a7] mt-2">Seu cartão será cobrado somente após o término dos 15 dias de teste gratuito. Você pode cancelar a qualquer momento sem cobranças.</p>
               </p>

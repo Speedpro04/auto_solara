@@ -103,6 +103,23 @@ function VehicleDetail() {
   const hasImages = images.length > 0
   const formatPrice = (price: number) => new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(price);
 
+  // Telefone real da loja, normalizado para o formato do wa.me (só dígitos + DDI 55).
+  const rawPhone = vehicle.store?.phone || ''
+  const phoneDigits = rawPhone.replace(/\D/g, '')
+  const whatsappPhone = phoneDigits
+    ? (phoneDigits.startsWith('55') ? phoneDigits : `55${phoneDigits}`)
+    : ''
+  const whatsappText = `Olá! Tenho interesse no ${vehicle.title} — ${vehicle.year} — ${vehicle.km.toLocaleString('pt-BR')}km. Podemos conversar?`
+  const whatsappUrl = whatsappPhone
+    ? `https://wa.me/${whatsappPhone}?text=${encodeURIComponent(whatsappText)}`
+    : ''
+
+  // Registra o lead (clique no WhatsApp) antes de abrir a conversa. Fire-and-forget:
+  // não bloqueia nem quebra a navegação do comprador se o analytics falhar.
+  const handleContactClick = () => {
+    api.post(`/vehicles/${vehicle.id}/contact`).catch(() => {})
+  }
+
   return (
     <div className="bg-[#0B0E14] min-h-screen text-white pb-32">
       
@@ -193,15 +210,24 @@ function VehicleDetail() {
                 </div>
 
                 <div className="space-y-4">
-                   <a 
-                    href={`https://wa.me/${vehicle.store?.phone || '5511999999999'}?text=Olá! Tenho interesse no ${vehicle.title} — ${vehicle.year} — ${vehicle.km.toLocaleString('pt-BR')}km. Podemos conversar?`}
-                    target="_blank"
-                    className="flex items-center justify-center gap-4 w-full bg-[#1dd1a1] text-black py-6 rounded-[4px] font-black uppercase tracking-widest hover:bg-white hover:text-gray-800 hover:scale-105 hover:shadow-[0_0_30px_rgba(29,209,161,0.4)] transition-all duration-500 group"
-                   >
-                     <MessageSquare className="w-6 h-6 group-hover:rotate-12 transition-transform" />
-                     Quero Este Carro
-                   </a>
-                   
+                   {whatsappUrl ? (
+                     <a
+                      href={whatsappUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      onClick={handleContactClick}
+                      className="flex items-center justify-center gap-4 w-full bg-[#1dd1a1] text-black py-6 rounded-[4px] font-black uppercase tracking-widest hover:bg-white hover:text-gray-800 hover:scale-105 hover:shadow-[0_0_30px_rgba(29,209,161,0.4)] transition-all duration-500 group"
+                     >
+                       <MessageSquare className="w-6 h-6 group-hover:rotate-12 transition-transform" />
+                       Quero Este Carro
+                     </a>
+                   ) : (
+                     <div className="flex items-center justify-center gap-4 w-full bg-white/5 text-[#576574] py-6 rounded-[4px] font-black uppercase tracking-widest cursor-not-allowed border border-white/5">
+                       <MessageSquare className="w-6 h-6" />
+                       Contato Indisponível
+                     </div>
+                   )}
+
                    <p className="text-center font-['Architects_Daughter'] text-base text-[#1dd1a1] opacity-70">
                      "Resposta em até 5 minutos pelo WhatsApp."
                    </p>
