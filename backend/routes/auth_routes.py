@@ -138,8 +138,11 @@ async def register(request: RegisterRequest):
             "trial_ends_at": trial_end
         }
 
-    except Exception as e:
-        raise HTTPException(status_code=400, detail=str(e))
+    except HTTPException:
+        raise
+    except Exception:
+        # Não vazar o erro interno (ex: detalhes do banco/Supabase) para o cliente.
+        raise HTTPException(status_code=400, detail="Não foi possível concluir o cadastro. Tente novamente.")
 
 @router.post("/recover-password")
 async def recover_password(request: RecoverPasswordRequest):

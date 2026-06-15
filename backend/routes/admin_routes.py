@@ -318,8 +318,8 @@ async def upload_file(file: UploadFile = File(...), store_id: str = Depends(get_
         url_response = supabase.storage.from_("autoracer_media").get_public_url(file_path)
         
         return {"url": url_response, "path": file_path}
-    except Exception as e:
-        raise HTTPException(status_code=500, detail=f"Erro no upload: {str(e)}")
+    except Exception:
+        raise HTTPException(status_code=500, detail="Erro ao enviar o arquivo. Tente novamente.")
 
 
 # ============================================

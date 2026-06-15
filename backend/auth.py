@@ -39,7 +39,20 @@ async def get_current_store(user=Depends(get_current_user)):
     if not response.data:
         raise HTTPException(status_code=403, detail="Usuário não vinculado a nenhuma loja")
 
-    return response.data[0]
+    store_user = response.data[0]
+
+    # Verifica se a loja está ativa. Faz o bloqueio do superadmin (active=false)
+    # ter efeito real na API — antes o toggle não impedia o acesso.
+    store = (
+        supabase.table("stores")
+        .select("active")
+        .eq("id", store_user["store_id"])
+        .execute()
+    )
+    if store.data and store.data[0].get("active") is False:
+        raise HTTPException(status_code=403, detail="Loja desativada. Entre em contato com o suporte.")
+
+    return store_user
 
 
 async def get_current_store_id(store=Depends(get_current_store)) -> str:

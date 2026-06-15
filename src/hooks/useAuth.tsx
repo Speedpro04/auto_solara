@@ -24,6 +24,7 @@ interface AuthContextType {
   loading: boolean
   login: (email: string, password: string) => Promise<void>
   logout: () => void
+  refreshStore: () => Promise<Store | null>
 }
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined)
@@ -83,8 +84,21 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     setStore(null)
   }
 
+  // Recarrega os dados da loja do backend (ex: após assinar e voltar do Stripe,
+  // o plano muda para 'parceiro' e o painel precisa refletir isso sem relogin).
+  const refreshStore = async (): Promise<Store | null> => {
+    try {
+      const { data } = await api.get('/admin/store')
+      localStorage.setItem('store', JSON.stringify(data))
+      setStore(data)
+      return data
+    } catch {
+      return null
+    }
+  }
+
   return (
-    <AuthContext.Provider value={{ user, store, loading, login, logout }}>
+    <AuthContext.Provider value={{ user, store, loading, login, logout, refreshStore }}>
       {children}
     </AuthContext.Provider>
   )

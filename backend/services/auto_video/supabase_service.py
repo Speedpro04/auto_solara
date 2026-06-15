@@ -99,6 +99,7 @@ async def _get_fotos(vehicle_id: str, limit: int = 8) -> list[str]:
             headers=HEADERS,
             params={
                 "vehicle_id": f"eq.{vehicle_id}",
+                "type": "eq.image",  # só fotos — um vídeo no slideshow quebra o render
                 "select": "url,order",
                 "order": "order.asc",
                 "limit": str(limit),

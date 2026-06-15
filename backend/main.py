@@ -82,8 +82,15 @@ if os.path.isdir(FRONTEND_DIST):
         # Não intercepta a API / health / outputs (já roteados acima).
         if full_path.startswith(("api/", "health", "outputs/", "docs", "redoc", "openapi.json")):
             return FileResponse(os.path.join(FRONTEND_DIST, "index.html"), status_code=404)
-        candidate = os.path.join(FRONTEND_DIST, full_path)
-        if full_path and os.path.isfile(candidate):
+        # Normaliza e garante que o arquivo resolvido fica DENTRO do dist
+        # (evita path traversal do tipo ../../etc/passwd).
+        candidate = os.path.normpath(os.path.join(FRONTEND_DIST, full_path))
+        dist_root = os.path.abspath(FRONTEND_DIST)
+        if (
+            full_path
+            and os.path.abspath(candidate).startswith(dist_root + os.sep)
+            and os.path.isfile(candidate)
+        ):
             return FileResponse(candidate)
         # SPA fallback: qualquer rota do React devolve o index.html
         return FileResponse(os.path.join(FRONTEND_DIST, "index.html"))

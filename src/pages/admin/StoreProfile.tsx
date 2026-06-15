@@ -1,11 +1,8 @@
 import { useState, useEffect } from 'react'
 import { Car, Upload, Save, Building2, MapPin, Phone } from 'lucide-react'
 import api from '../../lib/api'
-import { supabase } from '../../lib/supabase'
-import { useAuth } from '../../hooks/useAuth'
 
 function AdminStoreProfile() {
-  const { store } = useAuth()
   const [loading, setLoading] = useState(false)
   const [fetching, setFetching] = useState(true)
   const [formData, setFormData] = useState({
@@ -65,21 +62,16 @@ function AdminStoreProfile() {
     try {
       let logoUrl = currentLogo
 
-      if (logoFile && store?.id) {
-        const fileExt = logoFile.name.split('.').pop()
-        const fileName = `${store.id}/logo.${fileExt}`
-
-        const { error: uploadError } = await supabase.storage
-          .from('autoracer_media')
-          .upload(fileName, logoFile, { upsert: true })
-
-        if (uploadError) throw uploadError
-
-        const { data: urlData } = supabase.storage
-          .from('autoracer_media')
-          .getPublicUrl(fileName)
-
-        logoUrl = urlData.publicUrl
+      if (logoFile) {
+        // Sobe pelo backend (/admin/upload): usa a service key + valida tamanho/tipo,
+        // e resolve a pasta da loja pelo token. O upload direto via supabase-js falhava
+        // (o navegador não tem sessão autenticada → bloqueado por RLS no Storage).
+        const uploadData = new FormData()
+        uploadData.append('file', logoFile)
+        const { data } = await api.post('/admin/upload', uploadData, {
+          headers: { 'Content-Type': 'multipart/form-data' },
+        })
+        logoUrl = data.url
       }
 
       await api.put('/admin/store', {
