@@ -1,6 +1,14 @@
 fastapi==0.109.0
 uvicorn[standard]==0.27.0
 supabase==2.3.4
+# Dependencias transitivas do supabase FIXADAS de proposito.
+# Sem isso o pip puxa um gotrue novo que chama httpx.Client(proxy=...),
+# incompativel com httpx==0.25.2 -> backend quebra no boot (502 em loop).
+gotrue==2.4.2
+postgrest==0.15.1
+storage3==0.7.7
+realtime==1.0.6
+supafunc==0.3.3
 python-dotenv==1.0.0
 pydantic==2.5.3
 pydantic-settings==2.1.0
